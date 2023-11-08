@@ -1,159 +1,116 @@
-
-
 <?php 
 
-$test = 'this is test';
-// $test = Array(10, 20, 30);
-// $test = [10, 20, 30];
+require_once 'one.php';
 
-// print_r( $test );
+// public,
+// private,
+// protected,
 
+class One {
+    public $name = 'my name';
 
-// $test.toUpperCase();
-
-strtoupper($test);
-
-echo strtoupper($test);
-
-
-function functionName() {
-    echo 'this is our function';
+    public function show() {
+        echo $this->name;
+    }
 }
 
-functionName();
+$obj1 = new myOne\One();
 
-echo '<br>';
-
-$arr = [10, 20, 30, 40, 50];
-
-for ($i = 0; $i <= count($arr) - 1; $i++) { 
-    echo $arr[$i] . "<br>";
-}
-
-for ($i = 1; $i <= count($arr); $i++) { 
-    echo $arr[$i - 1] . "<br>";
-}
+// echo $obj1->test;
 
 
-
-
-
-// single line comment;
-# single line comment;
-
-/* 
-
-
-*/
-
-
-$var1 = 1;
-
-$number = 0;
-
-function test() {
-
-    static $number = 0;
-
-    echo $number;
-
-    $number++;
-}
-
-test();
-test();
-test();
-test();
-test();
-test();
-
-echo '<br>';
-echo '<br>';
-echo '<br>';
-echo '<br>';
-
-
-
-$arr2 = [
-    'name' => 'nasrullah',
-    'class' => 10,
-    'address' => 'dhaka'
-];
-
-foreach ($arr2 as $item) {
-    echo $item;
-    echo '<br>';
-}
-
-
-// $arr3 = [
-//     '0' => 'nasrullah', 
-//     '1' => 10, 
-//     '2' => 'dhaka'
-// ];
-
-$arr3 = ['nasrullah',10, 'dhaka'];
-
-print_r($arr3);
-
-echo '<br>';
-
-echo $arr2['name'];
-
-
-
-
-class Test {
-
-
-    public $test = 'this is test property';
-
-    public function first() {
-        echo 'this is our first object';
+class Two extends One {
+    public function showTwo() {
+        echo $this->name;
     }
 }
 
 
-$obj1 = new Test();
+$test2 = new Two();
 
-echo $obj1->first();
-echo $obj1->test;
-
+// echo $test2->showTwo();
 
 
+$test = new One();
+
+
+// print_r($test);
+
+// echo $test->show();
 
 
 
 
-?>
 
 
-<script>
+
+class Car {
+    public $dor = 'dor';
+    public $window = 'window';
 
 
-    
-    function test() {
-    let num = 0;
-    console.log(num);
+    public function __construct($var) {
+        echo 'this is from constructor ' . $var;
+    }
 
-    num++;
+    public function openingDor($dor_name) {
+        echo $dor_name . ' From opening dor method';
+        echo '<br>';
+
+        return $this;
+    }
+
+    public function closingWindow() {
+        echo $this->window . ' From opening window method';
+        echo '<br>';
+    }
 }
 
 
-test();
-test();
-test();
-test();
-test();
+
+// $car1 = new Car('value name');
+
+// echo $car1->openingDor('dor name')->closingWindow();
+ 
+
+
+trait SendToDataBase {
+    public function send($arr_from_html_form) {
+
+    }
+}
 
 
 
-let text = 'welcome to our home';
+trait NameOne {
+    public $nameOne = 'Name one';
+}
 
-let output = text.split(' ');
+trait NameTwo {
+    public $nameTwo = 'Name two';
+}
+
+trait NameThree {
+    public $nameThree = 'Name three';
+}
 
 
-</script>
+
+
+class FinalName {
+    use NameOne;
+    use NameTwo;
+    use NameThree;
+
+    public $finalName = 'Final Name';
+}
+
+
+$obj4 = new FinalName();
+
+echo $obj4->nameThree;
+
+
 
 
 
