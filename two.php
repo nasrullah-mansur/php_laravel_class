@@ -1,5 +1,7 @@
-<?php
 
-class Two {
-    public $test = 'This is test from two';
+<?php 
+
+trait Two 
+{
+    
 }
