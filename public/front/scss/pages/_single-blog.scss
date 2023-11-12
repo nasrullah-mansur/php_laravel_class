@@ -1,0 +1,310 @@
+.single-blog-content {
+    h1 {
+        font-size: 32px;
+        font-weight: 600;
+        line-height: 42px;
+    }
+
+    .calendar {
+        margin: 20px 0 20px;
+        display: flex;
+        align-items: center;
+
+        .category {
+            display: inline-block;
+            padding: 4px 15px;
+            background-color: $primary-color;
+            font-size: 12px;
+            color: #fff;
+            font-weight: 600;
+            text-transform: uppercase;
+            margin-right: 20px;
+        }
+    }
+
+    .info {
+        display: flex;
+        align-items: center;
+
+        .date,
+        .comment {
+            display: flex;
+            align-items: center;
+            margin-right: 15px;
+            font-size: 12px;
+
+            span {
+                display: inline-block;
+                padding-left: 8px;
+            }
+        }
+    }
+
+    .description {
+        font-size: 14px;
+        line-height: 26px;
+    }
+
+    .details {
+        p {
+            font-size: 14px;
+            line-height: 26px;
+        }
+
+        img {
+            width: 100%;
+            max-width: 100%;
+            margin-bottom: 20px;
+        }
+
+        blockquote {
+            position: relative;
+            padding-left: 40px;
+            font-size: 24px;
+            line-height: 36px;
+            color: $title-color;
+
+            &::before {
+                content: '';
+                width: 5px;
+                height: 100%;
+                background-color: $border-color;
+                position: absolute;
+                top: 0;
+                left: 0;
+            }
+        }
+    }
+
+}
+
+
+// Prev next;
+.prev-next {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-top: 50px;
+
+    .prev,
+    .next {
+        width: 50%;
+
+        @media (max-width: 767.98px) {
+            width: 100%;
+            margin-bottom: 30px;
+        }
+
+        span {
+            display: block;
+            margin-bottom: 10px;
+            font-size: 12px;
+            color: $body-color;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 500;
+        }
+
+        a {
+            display: inline-block;
+            max-width: 385px;
+            font-size: 20px;
+            line-height: 32px;
+            font-weight: 500;
+            color: $title-color;
+            font-family: $title-font;
+            transition: all .3s;
+
+            &:hover {
+                color: $primary-color;
+            }
+        }
+    }
+}
+
+// also like;
+.also-like-area {
+    padding-top: 50px;
+
+    .also-like-item {
+        margin-bottom: 30px;
+
+        img {
+            width: 100%;
+        }
+
+        .info {
+            display: flex;
+            align-items: center;
+            margin: 10px 0;
+    
+            .date,
+            .comment {
+                display: flex;
+                align-items: center;
+                margin-right: 15px;
+                font-size: 12px;
+    
+                span {
+                    display: inline-block;
+                    padding-left: 8px;
+                }
+            }
+        }
+
+        h4 {
+            font-size: 14px;
+            line-height: 20px;
+            font-weight: 500;
+
+            a {    
+                color: $title-color;
+                transition: all .3s;
+
+                &:hover {
+                    color: $primary-color;
+                }
+            }
+        }
+    }
+}
+
+// Comment area;
+.comment-area {
+    padding-top: 50px;
+
+    h2 {
+        font-size: 24px;
+        font-weight: 700;
+        padding-left: 10px;
+        position: relative;
+        margin-bottom: 30px;
+
+        &::before {
+            content: '';
+            width: 4px;
+            height: 100%;
+            background-color: $primary-color;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 9;
+        }
+    }
+
+    ul {
+        li {
+            display: flex;
+            flex-wrap: wrap;
+            // margin-bottom: 50px;
+
+            .img {
+                width: 105px;
+
+                img {
+                    width: 100%;
+                }
+            }
+
+            .content {
+                width: calc(100% - 105px);
+                padding-left: 20px;
+
+                .title {
+                    display: flex;
+                    align-items: center;
+                    margin-bottom: 15px;
+
+                    h5 {
+                        font-size: 14px;
+                        font-weight: 600;
+                        margin-bottom: 0;
+                    }
+
+                    span {
+                        display: block;
+                        font-size: 12px;
+                        padding-left: 15px;
+                    }
+                }
+
+                p {
+                    font-size: 14px;
+                    line-height: 26px;
+                }
+
+                .reply {
+                    font-size: 13px;
+                    color: $title-color;
+                    font-weight: 500;
+                    transition: all .3s;
+
+                    &:hover {
+                        color: $primary-color;
+                    }
+                }
+            }
+
+            ul {
+                margin-top: 50px;
+                padding-left: 80px;
+
+                @media (max-width: 767.98px) {
+                    padding-left: 50px;
+                }
+
+                li {
+                    margin-bottom: 50px;
+                }
+            }
+        }
+    }
+
+    form {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+
+        @media (max-width: 767.98px) {
+            margin-bottom: 50px;
+        }
+
+        input,
+        textarea {
+            width: 100%;
+            height: 50px;
+            padding: 0 15px;
+            border: 1px solid $border-color;
+            margin-bottom: 20px;
+        }
+
+        .half {
+            width: calc(50% - 15px);
+
+            @media (max-width: 767.98px) {
+                width: 100%;
+            }
+        }
+
+        textarea {
+            padding-top: 15px;
+            height: 120px;
+        }
+
+        button {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 15px 50px;
+            background-color: $title-color;
+            font-weight: 600;
+            color: #fff;
+            border: 0;
+            text-transform: uppercase;
+            transition: all .3s;
+
+            &:hover {
+                background-color: $primary-color;
+            }
+        }
+    }
+}

@@ -1,0 +1,26 @@
+
+/*
+    Table Of Content;
+    1. Common CSS;
+    
+*/
+
+
+
+@import 'variables/variable';
+@import 'common/common';
+@import 'mixins/mixins';
+
+@import 'sections/header';
+@import 'sections/footer';
+@import 'sections/blog-cart';
+@import 'sections/sidebar';
+
+@import 'pages/index';
+@import 'pages/blog';
+@import 'pages/contact';
+@import 'pages/single-blog';
+
+
+
+

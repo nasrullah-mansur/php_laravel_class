@@ -1,0 +1,90 @@
+.blog-cart {
+    margin-bottom: 30px;
+
+    h3 {
+        a {
+            display: inline-block;
+            padding-top: 15px;
+            color: $title-color;
+            font-size: 16px;
+            line-height: 26px;
+            transition: all .3s;
+
+            &:hover {
+                color: $primary-color;
+            }
+        }
+    }
+
+    .info {
+        display: flex;
+        align-items: center;
+
+        .date,
+        .comment {
+            display: flex;
+            align-items: center;
+            margin-right: 15px;
+            font-size: 12px;
+
+            span {
+                display: inline-block;
+                padding-left: 8px;
+            }
+        }
+    }
+
+    p {
+        font-size: 14px;
+        line-height: 26px;
+        padding-top: 10px;
+    }
+
+    .read-more {
+        display: inline-block;
+        margin-top: 5px;
+        border: 1px solid #e9e9e9;
+        padding: 14px 30px;
+        color: #333333;
+        background: transparent;
+        font-weight: 600;
+        font-size: 14px;
+        transition: all .3s;
+
+        &:hover {
+            border-color: #1c1c21;
+            background-color: #1c1c21;
+            color: #fff;
+        }
+    }
+}
+
+.custom-pagination {
+    display: flex;
+    margin-top: 15px;
+
+    li {
+        margin-right:  5px;
+
+        a {
+            background: #F7F7FD;
+            font-size: 14px;
+            color: #3b3b3b;
+            font-weight: 700;
+            display: inline-block;
+            padding: 9px 18px;
+            box-shadow: 0 2px 0 rgba(0, 0, 0, 0.07);
+            transition: all .3s;
+
+            &:hover {
+                color: $primary-color;
+            }
+        }
+
+        &.active {
+            a {
+                color: $primary-color;
+            }
+        }
+    }
+}

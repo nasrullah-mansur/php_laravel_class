@@ -1,7 +1,8 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\FrontController;
+use App\Http\Controllers\ProfileController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,31 +15,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
-
-Route::get('/', function() {
-    return 'this is home page';
-});
-
-Route::get('/about', function() {
-    return 'this is about page';
-});
-
-
-Route::get('/test', function() {
-    return view('test/test');
-});
-
-// Route::get('/dashboard', function () {
-//     return view('dashboard');
-// })->middleware(['auth', 'verified'])->name('dashboard');
-
-// Route::middleware('auth')->group(function () {
-//     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-//     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-//     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-// });
-
-// require __DIR__.'/auth.php';
+Route::get('/', [FrontController::class, 'index'])->name('front.index');
+Route::get('/blog', [FrontController::class, 'blog'])->name('front.blog');
+Route::get('/contact', [FrontController::class, 'contact'])->name('front.contact');
+Route::get('/single-blog', [FrontController::class, 'single_blog'])->name('front.single.blog');
