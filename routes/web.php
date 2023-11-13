@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FrontController;
 use App\Http\Controllers\ProfileController;
@@ -19,3 +20,12 @@ Route::get('/', [FrontController::class, 'index'])->name('front.index');
 Route::get('/blog', [FrontController::class, 'blog'])->name('front.blog');
 Route::get('/contact', [FrontController::class, 'contact'])->name('front.contact');
 Route::get('/single-blog', [FrontController::class, 'single_blog'])->name('front.single.blog');
+
+
+// These are dashboard routes;
+
+Route::prefix('admin')->group(function() {
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+});
+
+
