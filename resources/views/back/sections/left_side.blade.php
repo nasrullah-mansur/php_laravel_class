@@ -24,6 +24,13 @@
                     <li><a href="contact.html">Contact</a></li>                    
                 </ul>
             </li>
+
+            <li><a href="javascript:void(0);" class="menu-toggle"><i class="zmdi zmdi-blogger"></i><span>Category</span></a>
+                <ul class="ml-menu">
+                    <li><a href="{{ route('back.category.index') }}">All Category</a></li>
+                    <li><a href="{{ route('back.category.create') }}">Create Category</a></li>                    
+                </ul>
+            </li>
         </ul>
     </div>
 </aside>

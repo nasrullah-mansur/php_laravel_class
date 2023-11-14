@@ -55,7 +55,9 @@
                         <div class="col-lg-4">
                             <div class="also-like-item">
                                 <div class="img">
-                                    <img src="{{ asset('front/images/t1.jpg') }}" alt="img">
+                                    <a href="#">
+                                        <img src="{{ asset('front/images/t1.jpg') }}" alt="img">
+                                    </a>
                                 </div>
                                 <div class="content">
                                     <div class="info">

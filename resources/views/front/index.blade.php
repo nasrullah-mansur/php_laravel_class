@@ -30,6 +30,7 @@
                                 <a href="#"><img class="img-fluid w-100" src="{{ asset('front/images/t1.jpg') }}" alt="img"></a>
                                 <h3><a href="#">Critic’s notebook deep dives into jutice from Shakespeare Finch.</a></h3>
                                 <div class="info">
+                                    <a href="#" class="category">Business</a>
                                     <div class="date">
                                         <i class="fas fa-calendar-alt"></i>
                                         <span>01 SEP 2018</span>
