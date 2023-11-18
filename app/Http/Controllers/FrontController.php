@@ -2,17 +2,22 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use Illuminate\Http\Request;
 
 class FrontController extends Controller
 {
     public function index() {
-        return view('welcome');
+
+        $categories = Category::all();
+
+        return view('welcome', compact('categories'));
     }
 
 
     public function blog() {
-        return view('front.blog');
+        $categories = Category::all();
+        return view('front.blog', compact('categories'));
     }
 
     public function contact() {
@@ -20,6 +25,7 @@ class FrontController extends Controller
     }
 
     public function single_blog() {
-        return view('front.single_blog');
+        $categories = Category::all();
+        return view('front.single_blog', compact('categories'));
     }
 }

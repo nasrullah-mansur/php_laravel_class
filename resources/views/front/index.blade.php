@@ -185,49 +185,7 @@
             <div class="col-lg-4">
                 <aside class="sidebar">
                     <!-- Categories -->
-                    <div class="sidebar-item">
-                        <h3 class="sidebar-title">Categories</h3>
-                        <div class="sidebar-category">
-                            <ul class="mb-0">
-                                <li>
-                                    <a href="#">
-                                        <span>Business</span>
-                                        <span>20</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        <span>Politic</span>
-                                        <span>10</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        <span>Fashion</span>
-                                        <span>10</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        <span>Sports</span>
-                                        <span>10</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        <span>Football</span>
-                                        <span>10</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        <span>Food</span>
-                                        <span>10</span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
+                    @include('front.sections.category')
 
                     <!-- Popular post -->
                     <div class="sidebar-item">

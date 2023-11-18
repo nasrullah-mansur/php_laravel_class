@@ -5,7 +5,8 @@
     <div class="body_scroll">    
         <div class="block-header">
             @if (Session::has('success'))
-            <div class="alert alert-success">
+            <div class="alert alert-success alert-dismissible" role="alert">
+                <button style="margin-top: 14px;" type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 <strong>Well done!</strong> {{Session::get('success')}}
             </div>
             @endif
@@ -56,13 +57,17 @@
                                             <tbody>
                                                 @foreach ($categories as $category)
                                                 <tr>
-                                                    <th scope="row">{{ $category->id }}</th>
+                                                    <th scope="row">{{ $loop->iteration }}</th>
                                                     <td>{{ $category->name }}</td>
                                                     <td>{{ $category->created_at->diffForHumans() }}</td>
                                                     <td>
                                                         <div class="btn-area">
-                                                            <a href="#" type="submit" class="btn btn-raised btn-primary waves-effect">Edit</a>
-                                                            <a href="#" type="submit" class="btn btn-raised btn-danger waves-effect">Delete</a>
+                                                            <a href="{{ route('back.category.edit', $category->slug) }}" type="submit" class="btn btn-raised btn-primary waves-effect">Edit</a>
+                                                            <a href="#" type="submit" class="btn btn-raised btn-danger waves-effect delete-btn">Delete</a>
+                                                            <form class="d-none" action="{{ route('back.category.delete') }}" method="POST">
+                                                                @csrf
+                                                                <input type="test" name="slug" value="{{ $category->slug }}">
+                                                            </form>
                                                         </div>
                                                     </td>
                                                 </tr>
@@ -79,4 +84,40 @@
         </div>
     </div>
 </section>
+@endsection
+
+
+@section('custom_js')
+<script>
+
+    $(document).ready(function() {
+
+        $('.delete-btn').on('click', function() {
+            swal({
+                title: "Are you sure?",
+                text: "Once deleted, you will not be able to recover this imaginary file!",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+              })
+              .then((willDelete) => {
+                if (willDelete) {
+                  swal("Poof! Your imaginary file has been deleted!", {
+                    icon: "success",
+                  });
+                  
+                  let myForm = $(this).next();
+
+                  myForm.submit();
+
+                } else {
+                  swal("Your imaginary file is safe!");
+                }
+            });
+        })
+
+    });
+
+</script>
+
 @endsection
