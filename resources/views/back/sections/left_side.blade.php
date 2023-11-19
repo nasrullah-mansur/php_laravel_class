@@ -31,6 +31,13 @@
                     <li><a href="{{ route('back.category.create') }}">Create Category</a></li>                    
                 </ul>
             </li>
+
+            <li><a href="javascript:void(0);" class="menu-toggle"><i class="zmdi zmdi-blogger"></i><span>Slider</span></a>
+                <ul class="ml-menu">
+                    <li><a href="{{ route('back.slider.index') }}">All Sliders</a></li>
+                    <li><a href="{{ route('back.slider.create') }}">Create Slider</a></li>                    
+                </ul>
+            </li>
         </ul>
     </div>
 </aside>

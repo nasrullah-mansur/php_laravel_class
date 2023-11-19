@@ -80,7 +80,18 @@
         </li>
         
         <li><a href="javascript:void(0);" class="js-right-sidebar" title="Setting"><i class="zmdi zmdi-settings zmdi-hc-spin"></i></a></li>
-        <li><a href="sign-in.html" class="mega-menu" title="Sign Out"><i class="zmdi zmdi-power"></i></a></li>
+        <li><a href="#" onclick="logout();" class="mega-menu" title="Sign Out"><i class="zmdi zmdi-power"></i></a></li>
+
+        <form id="logout" action="{{ route('logout') }}" method="POST">
+            @csrf
+        </form>
+
+        <script>
+            function logout() {
+                let logutForm = document.getElementById('logout');
+                logutForm.submit();
+            }
+        </script>
 
     </ul>
 </div>
