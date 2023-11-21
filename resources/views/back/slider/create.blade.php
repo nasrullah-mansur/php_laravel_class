@@ -1,6 +1,7 @@
 @extends('back.layout.layout')
 
 @section('content')
+
 <section class="content">
     <div class="body_scroll">    
         <div class="block-header">
@@ -12,7 +13,7 @@
 
             <div class="row">
                 <div class="col-lg-7 col-md-6 col-sm-12">
-                    <h2>Blog Category Create</h2>
+                    <h2>Slider Create</h2>
                     
                     <button class="btn btn-primary btn-icon mobile_menu" type="button"><i class="zmdi zmdi-sort-amount-desc"></i></button>
                 </div>
@@ -56,5 +57,14 @@
     $(document).ready(function() {
         $('#image').dropify();
     });
+
+    // let myImage = document.getElementById('image');
+
+    // myImage.addEventListener('change', function() {
+    //     let [ img ] = this.files;
+
+    //     console.log(img);
+    // })
+
 </script>
 @endsection

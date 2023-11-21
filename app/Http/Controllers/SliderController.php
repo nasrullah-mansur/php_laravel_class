@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Slider;
 use Illuminate\Http\Request;
+use Intervention\Image\Facades\Image;
 
 class SliderController extends Controller
 {
@@ -24,19 +25,11 @@ class SliderController extends Controller
             'image' => 'required|image|mimes:png,jpg,gif,jpeg|max:2024'
         ]);
 
+      
+
         $slider = new Slider();
         $slider->title = $request->title;
-
-        if($request->hasFile('image')) {
-            $path = 'uploaded_images/slider/';
-            $imageName = rand(111, 999) . $request->image->getClientOriginalName();
-            $db_name = $path . $imageName;
-
-            $request->image->move(public_path($path), $imageName);
-
-            $slider->image = $db_name;
-        }
-
+        $slider->image = image_upload(SLIDER_IMAGES_PATH, $request->image, null);
 
         $slider->save();
 
@@ -62,20 +55,11 @@ class SliderController extends Controller
 
         $slider = Slider::where('id', $id)->firstOrFail();
 
-        $slider->title;
-
+        $slider->title = $request->title;
         if($request->hasFile('image')) {
-
-            unlink(public_path($slider->image));
-
-            $path = 'uploaded_images/slider/';
-            $imageName = rand(111, 999) . $request->image->getClientOriginalName();
-            $db_name = $path . $imageName;
-
-            $request->image->move(public_path($path), $imageName);
-
-            $slider->image = $db_name;
+            $slider->image = image_upload(SLIDER_IMAGES_PATH, $request->image, $slider->image);
         }
+       
 
         $slider->save();
 
