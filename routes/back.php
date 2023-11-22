@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\SliderController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -40,6 +41,23 @@ Route::middleware('auth')->group(function() {
         Route::get('/slider/edit/{id}', [SliderController::class, 'edit'])->name('back.slider.edit');
         Route::post('/slider/update/{id}', [SliderController::class, 'update'])->name('back.slider.update');
         Route::post('/slider/delete', [SliderController::class, 'delete'])->name('back.slider.delete');
+
+
+        // Users;
+        Route::resource('user', UserController::class);
+
+
+        // Route::get('user', [UserController::class, 'index'])->name('user.index');
+        // Route::get('user/{id}', [UserController::class, 'show'])->name('user.show');
+        // Route::get('user/create', [UserController::class, 'create'])->name('user.create');
+        // Route::post('user', [UserController::class, 'store'])->name('user.store');
+        // Route::get('user/{id}/edit', [UserController::class, 'edit'])->name('user.edit');
+        // Route::put('user/{id}', [UserController::class, 'update'])->name('user.update');
+        // Route::post('user/{id}', [UserController::class, 'destroy'])->name('user.destroy');
+
+
+
+
     });
 });
 

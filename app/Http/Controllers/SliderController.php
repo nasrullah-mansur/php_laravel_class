@@ -22,14 +22,16 @@ class SliderController extends Controller
 
         $request->validate([
             'title' => 'required|max:256',
-            'image' => 'required|image|mimes:png,jpg,gif,jpeg|max:2024'
+            'image' => 'required|image|mimes:png,jpg,gif,jpeg|max:2024',
+            // 'thumbnail' => 'required|image|mimes:png,jpg,gif,jpeg|max:2024'
         ]);
 
       
 
         $slider = new Slider();
         $slider->title = $request->title;
-        $slider->image = image_upload(SLIDER_IMAGES_PATH, $request->image, null);
+        $slider->image = upload_custom_image(SLIDER_IMAGES_PATH, $request->image, null, 1980, 800, 0);
+        $slider->thumbnail = upload_custom_image(SLIDER_IMAGES_THUMBNAIL_PATH, $request->image, null, 280, 113, 25);
 
         $slider->save();
 
@@ -49,17 +51,19 @@ class SliderController extends Controller
     public function update(Request $request, $id) {
         $request->validate([
             'title' => 'required|max:256',
-            'image' => 'nullable|image|mimes:png,jpg,gif,jpeg|max:2024'
+            'image' => 'nullable|image|mimes:png,jpg,gif,jpeg|max:2024',
+            // 'thumbnail' => 'nullable|image|mimes:png,jpg,gif,jpeg|max:2024',
         ]);
 
 
         $slider = Slider::where('id', $id)->firstOrFail();
 
         $slider->title = $request->title;
+
         if($request->hasFile('image')) {
-            $slider->image = image_upload(SLIDER_IMAGES_PATH, $request->image, $slider->image);
+            $slider->image = upload_custom_image(SLIDER_IMAGES_PATH, $request->image, $slider->image, 1980, 800, 0);
+            $slider->thumbnail = upload_custom_image(SLIDER_IMAGES_THUMBNAIL_PATH, $request->image, $slider->thumbnail, 280, 113, 25);
         }
-       
 
         $slider->save();
 
@@ -71,7 +75,9 @@ class SliderController extends Controller
     public function delete(Request $request) {
         
         $slider = Slider::where('id', $request->id)->firstOrFail();
+        
         unlink(public_path($slider->image));
+        unlink(public_path($slider->thumbnail));
 
         $slider->delete();
         return redirect()->route('back.slider.index')->with('success', 'Image removed successful');
