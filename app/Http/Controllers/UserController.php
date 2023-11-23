@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -12,7 +14,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::all();
+        $users = User::orderBy('created_at', 'DESC')->get();
 
         return view('back.users.index', compact('users'));
     }
@@ -22,7 +24,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+        return view('back.users.create');
     }
 
     /**
@@ -30,7 +32,22 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required|max:256',
+            'email' => 'required|email|unique:users',
+            'password' => 'required|min:6',
+            'confirm_password' => 'required|same:password'
+        ]);
+        
+        $user = new User();
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->password = Hash::make($request->password);
+
+        $user->save();
+
+        return redirect()->route('user.index')->with('success', "User added successfully");
+
     }
 
     /**
@@ -46,7 +63,8 @@ class UserController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $user = User::where('id', $id)->firstOrFail();
+        return view('back.users.edit', compact('user'));
     }
 
     /**
@@ -54,7 +72,27 @@ class UserController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+
+        $user = User::where('id', $id)->firstOrFail();
+
+        $request->validate([
+            'name' => 'required|max:256',
+            'email' => 'required|email|unique:users',
+            'password' => 'required|min:6',
+            'confirm_password' => 'required|same:password'
+        ]);
+        
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->password = Hash::make($request->password);
+
+        $user->save();
+
+        if(Auth::user()->email === $user->email) {
+            Auth::logout();
+        }
+        
+        return redirect()->route('user.index')->with('success', "User updated successfully");
     }
 
     /**
@@ -62,6 +100,14 @@ class UserController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $user = User::where('id', $id)->firstOrFail();
+
+        $user->delete();
+
+        if(Auth::user()->email === $user->email) {
+            Auth::logout();
+        }
+
+        return redirect()->route('user.index')->with('success', "User removed successfully");
     }
 }

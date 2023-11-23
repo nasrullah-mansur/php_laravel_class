@@ -71,10 +71,11 @@
                                                     <td>{{ $user->updated_at->diffForHumans() }}</td>
                                                     <td>
                                                         <div class="btn-area">
-                                                            <a href="{{ route('back.slider.edit', $user->id) }}" type="submit" class="btn btn-raised btn-primary waves-effect">Edit</a>
+                                                            <a href="{{ route('user.edit', $user->id) }}" type="submit" class="btn btn-raised btn-primary waves-effect">Edit</a>
                                                             <a href="#" type="submit" class="btn btn-raised btn-danger waves-effect delete-btn">Delete</a>
-                                                            <form class="d-none" action="{{ route('back.slider.delete') }}" method="POST">
+                                                            <form class="d-none" action="{{ route('user.destroy', $user->id) }}" method="POST">
                                                                 @csrf
+                                                                @method('DELETE')
                                                                 <input type="test" name="id" value="{{ $user->id }}">
                                                             </form>
                                                         </div>

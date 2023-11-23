@@ -25,10 +25,10 @@
                 </ul>
             </li>
 
-            <li><a href="javascript:void(0);" class="menu-toggle"><i class="zmdi zmdi-blogger"></i><span>Category</span></a>
+            <li class="{{ Route::is('back.category.*') ? 'active' : '' }}"><a href="javascript:void(0);" class="menu-toggle"><i class="zmdi zmdi-blogger"></i><span>Category</span></a>
                 <ul class="ml-menu">
-                    <li><a href="{{ route('back.category.index') }}">All Category</a></li>
-                    <li><a href="{{ route('back.category.create') }}">Create Category</a></li>                    
+                    <li class="{{ Route::is('back.category.index') ? 'active' : '' }}"><a href="{{ route('back.category.index') }}">All Category</a></li>
+                    <li class="{{ Route::is('back.category.create') ? 'active' : '' }}"><a href="{{ route('back.category.create') }}">Create Category</a></li>                    
                 </ul>
             </li>
 
@@ -36,6 +36,13 @@
                 <ul class="ml-menu">
                     <li><a href="{{ route('back.slider.index') }}">All Sliders</a></li>
                     <li><a href="{{ route('back.slider.create') }}">Create Slider</a></li>                    
+                </ul>
+            </li>
+
+            <li><a href="javascript:void(0);" class="menu-toggle"><i class="zmdi zmdi-blogger"></i><span>Users</span></a>
+                <ul class="ml-menu">
+                    <li><a href="{{ route('user.index') }}">All User</a></li>
+                    <li><a href="{{ route('user.create') }}">Create User</a></li>                    
                 </ul>
             </li>
         </ul>
