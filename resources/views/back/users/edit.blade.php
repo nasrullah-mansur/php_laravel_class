@@ -36,7 +36,7 @@
 
                             <label for="email">Email</label>
                             <div class="form-group">                                
-                                <input value="{{$user->email}}" name="email" type="text" id="email" class="form-control" placeholder="Enter Email">
+                                <input value="{{$user->email}}" readonly name="email" type="text" id="email" class="form-control" placeholder="Enter Email">
                                 <span class="text-danger">{{ $errors->first('email') }}</span>
                             </div>
 

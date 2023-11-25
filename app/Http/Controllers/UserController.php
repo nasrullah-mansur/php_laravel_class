@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
@@ -14,7 +15,8 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::orderBy('created_at', 'DESC')->get();
+
+        $users = User::orderBy('created_at', 'DESC') ->get();
 
         return view('back.users.index', compact('users'));
     }
@@ -77,17 +79,15 @@ class UserController extends Controller
 
         $request->validate([
             'name' => 'required|max:256',
-            'email' => 'required|email|unique:users',
             'password' => 'required|min:6',
             'confirm_password' => 'required|same:password'
         ]);
         
         $user->name = $request->name;
-        $user->email = $request->email;
         $user->password = Hash::make($request->password);
 
         $user->save();
-
+        
         if(Auth::user()->email === $user->email) {
             Auth::logout();
         }

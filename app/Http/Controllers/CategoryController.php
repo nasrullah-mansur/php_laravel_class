@@ -12,7 +12,7 @@ class CategoryController extends Controller
 
     public function index() {
 
-       $categories = Category::all();
+       $categories = Category::orderBy('created_at', 'DESC')->get();
 
         return view('back.category.index', compact('categories'));
     }
@@ -36,15 +36,21 @@ class CategoryController extends Controller
         $category->name = $request->name; 
         $category->slug = Str::slug($request->name);
 
+        $category->title = $request->title;
+        $category->description = $request->description;
+        $category->keyword = $request->keyword;
+        $category->head_script = $request->head_script;
+        $category->body_script = $request->body_script;
+
         $category->save();
 
-        return redirect()->route('back.category.create')->with('success', 'Category added successful');
+        return redirect()->route('back.category.index')->with('success', 'Category added successful');
 
     }
 
 
     public function edit($slug) {
-        $category = Category::where('slug', $slug)->firstOrFail(['name', 'slug']);
+        $category = Category::where('slug', $slug)->firstOrFail();
 
         return view('back.category.edit', compact('category'));
     }
@@ -59,6 +65,12 @@ class CategoryController extends Controller
         $category = Category::where('slug', $slug)->firstOrFail();
         $category->name = $request->name;
         $category->slug = Str::slug($request->name);
+
+        $category->title = $request->title;
+        $category->description = $request->description;
+        $category->keyword = $request->keyword;
+        $category->head_script = $request->head_script;
+        $category->body_script = $request->body_script;
 
         $category->save();
 

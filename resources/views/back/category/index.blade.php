@@ -51,15 +51,17 @@
                                                     <th>ID</th>
                                                     <th>Category Name</th>
                                                     <th>Created At</th>
+                                                    <th>Updated At</th>
                                                     <th>Action</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                @foreach ($categories as $category)
+                                                @forelse ($categories as $category)
                                                 <tr>
                                                     <th scope="row">{{ $loop->iteration }}</th>
                                                     <td>{{ $category->name }}</td>
                                                     <td>{{ $category->created_at->diffForHumans() }}</td>
+                                                    <td>{{ $category->updated_at->format('d M Y | h:i A ') }}</td>
                                                     <td>
                                                         <div class="btn-area">
                                                             <a href="{{ route('back.category.edit', $category->slug) }}" type="submit" class="btn btn-raised btn-primary waves-effect">Edit</a>
@@ -71,7 +73,13 @@
                                                         </div>
                                                     </td>
                                                 </tr>
-                                                @endforeach
+                                                @empty
+                                                <tr>
+                                                    <td colspan="4">
+                                                        <span class="text-center d-block">No data found</span>
+                                                    </td>
+                                                </tr>
+                                                @endforelse
                                             </tbody>
                                         </table>
                                     </div>
