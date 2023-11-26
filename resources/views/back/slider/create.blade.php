@@ -58,13 +58,5 @@
         $('#image').dropify();
     });
 
-    // let myImage = document.getElementById('image');
-
-    // myImage.addEventListener('change', function() {
-    //     let [ img ] = this.files;
-
-    //     console.log(img);
-    // })
-
 </script>
 @endsection

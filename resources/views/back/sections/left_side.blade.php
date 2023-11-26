@@ -45,6 +45,13 @@
                     <li><a href="{{ route('user.create') }}">Create User</a></li>                    
                 </ul>
             </li>
+
+            <li><a href="javascript:void(0);" class="menu-toggle"><i class="zmdi zmdi-blogger"></i><span>Blog</span></a>
+                <ul class="ml-menu">
+                    <li><a href="{{ route('back.blog.index') }}">All Blogs</a></li>
+                    <li><a href="{{ route('back.blog.create') }}">Create Blog</a></li>                    
+                </ul>
+            </li>
         </ul>
     </div>
 </aside>

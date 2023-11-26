@@ -45,7 +45,7 @@
                         <h3>SEO</h3>
                         <div class="col-sm-12">
                             
-                                @csrf
+                               
                                 <label for="title">Title</label>
                                 <div class="form-group">                                
                                     <input name="title" type="text" id="title" class="form-control" placeholder="SEO Title">

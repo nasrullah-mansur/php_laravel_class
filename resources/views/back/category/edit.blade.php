@@ -23,6 +23,7 @@
         </div>
         <div class="container-fluid" style="min-height: calc(100vh - 150px)">
             <form method="POST" action="{{ route('back.category.update', $category->slug) }}">
+               
                 <div class="card">
                     <div class="body">
                         <div class="col-sm-12">
@@ -45,7 +46,7 @@
                         <h3>SEO</h3>
                         <div class="col-sm-12">
                             
-                                @csrf
+                               
                                 <label for="title">Title</label>
                                 <div class="form-group">                                
                                     <input value="{{$category->title}}" name="title" type="text" id="title" class="form-control" placeholder="SEO Title">

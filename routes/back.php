@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BlogController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DashboardController;
@@ -44,20 +45,17 @@ Route::middleware('auth')->group(function() {
 
 
         // Users;
-        Route::resource('user', UserController::class);
+        Route::resource('user', UserController::class)->except('show');
 
 
-        // Route::resource('user', UserController::class)->except('store');
-        // Route::post('user/store', UserController::class, 'my_user_store')->name('user.store');
+        // Blog;
+        Route::get('/blogs', [BlogController::class, 'index'])->name('back.blog.index');
+        Route::get('/blog/create', [BlogController::class, 'create'])->name('back.blog.create');
+        Route::post('/blog/store', [BlogController::class, 'store'])->name('back.blog.store');
+        Route::get('/blog/edit/{slug}', [BlogController::class, 'edit'])->name('back.blog.edit');
+        Route::post('/blog/update/{slug}', [BlogController::class, 'update'])->name('back.blog.update');
+        Route::post('/blog/delete', [BlogController::class, 'delete'])->name('back.blog.delete');
 
-
-        // Route::get('user', [UserController::class, 'index'])->name('user.index');
-        // Route::get('user/{id}', [UserController::class, 'show'])->name('user.show');
-        // Route::get('user/create', [UserController::class, 'create'])->name('user.create');
-        // Route::post('user', [UserController::class, 'store'])->name('user.store');
-        // Route::get('user/{id}/edit', [UserController::class, 'edit'])->name('user.edit');
-        // Route::put('user/{id}', [UserController::class, 'update'])->name('user.update');
-        // Route::DELETE('user/{id}', [UserController::class, 'destroy'])->name('user.destroy');
 
 
 

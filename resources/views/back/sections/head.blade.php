@@ -6,10 +6,14 @@
 <title>:: Aero Bootstrap4 Admin ::</title>
 <link rel="icon" href="{{asset('back/favicon.ico')}}" type="image/x-icon">
 <!-- Favicon-->
-<link rel="stylesheet" href="{{ asset('back/plugins/bootstrap/css/bootstrap.min.css') }}">
+<link rel="stylesheet" href="{{ asset('back/plugins/bootstrap/css/bootstrap.min.css') }}" />
 <link rel="stylesheet" href="{{ asset('back/plugins/jvectormap/jquery-jvectormap-2.0.3.css') }}"/>
 <link rel="stylesheet" href="{{ asset('back/plugins/charts-c3/plugin.css') }}"/>
 <link rel="stylesheet" href="{{ asset('back/plugins/sweetalert/sweetalert.css') }}"/>
 <link rel="stylesheet" href="{{ asset('back/plugins/dropify/css/dropify.min.css') }}">
+<link rel="stylesheet" href="{{ asset('back/plugins/summernote/dist/summernote.css')}}" />
+<link rel="stylesheet" href="{{ asset('back/plugins/bootstrap-select/css/bootstrap-select.css') }}" />
+<link rel="stylesheet" href="{{ asset('back/plugins/select2/select2.css') }}" />
+<link rel="stylesheet" href="{{ asset('back/plugins/bootstrap-tagsinput/bootstrap-tagsinput.css') }}">
 <!-- Custom Css -->
 <link rel="stylesheet" href="{{ asset('back/css/style.min.css') }}">
