@@ -6,6 +6,12 @@ use Intervention\Image\Facades\Image;
 const SLIDER_IMAGES_PATH = 'upload/slider/';
 const SLIDER_IMAGES_THUMBNAIL_PATH = 'upload/slider/thumbnail/';
 
+const BLOG_IMAGE = 'upload/blog/';
+const BLOG_IMAGE_SM = 'upload/blog/sm/';
+const BLOG_IMAGE_THUMB = 'upload/blog/thumb/';
+
+const STATUS_MSG = ['Active', 'Inactive', 'Draft'];
+
 
 function image_upload($dir, $image, $old = null) {
 
@@ -33,7 +39,7 @@ function image_upload($dir, $image, $old = null) {
 }
 
 
-function upload_custom_image($dir, $image, $old = null, $w, $h, $blur) {
+function upload_custom_image($dir, $image, $old = null, $w, $h, $blur = null) {
     // For update image;
     if($old) {
         unlink(public_path($old));
@@ -57,5 +63,12 @@ function upload_custom_image($dir, $image, $old = null, $w, $h, $blur) {
 
     // return database name;
     return ($dir . $image_name);
+}
+
+
+function deleteImg ($img) {
+    if($img) {
+        unlink(public_path($img));
+    }
 }
 

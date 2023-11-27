@@ -20,14 +20,14 @@
             </div>
         </div>
         <div class="container-fluid" style="min-height: calc(100vh - 150px);">
-            <form method="POST" action="{{ route('back.blog.store') }}">
+            <form method="POST" action="{{ route('back.blog.store') }}" enctype="multipart/form-data">
                 @csrf
                 <div class="card">
                     <div class="body">
                         <div class="col-sm-12">
                             <label for="title">Title</label>
                             <div class="form-group">
-                                <input name="title" type="text" id="title" class="form-control" placeholder="SEO Title" />
+                                <input value="{{ old('title') }}" name="title" type="text" id="title" class="form-control" placeholder="SEO Title" />
                                 <span class="text-danger">{{ $errors->first('title') }}</span>
                             </div>
 
@@ -72,6 +72,15 @@
                             <div class="form-group">
                                 <textarea name="details" id="details" class="form-control summernote" placeholder="Details"></textarea>
                                 <span class="text-danger">{{ $errors->first('details') }}</span>
+                            </div>
+
+                            <div class="form-group">
+                                <select name="status" class="form-control show-tick">
+                                    @foreach (STATUS_MSG as $status_msg)
+                                    <option value="{{ $status_msg }}">{{ $status_msg }}</option>
+                                    @endforeach
+                                </select>
+                                <span class="text-danger">{{ $errors->first('name') }}</span>
                             </div>
                         </div>
                     </div>
@@ -118,19 +127,19 @@
                                     <div class="panel-body">
                                         <label for="custom_html">Custom HTML</label>
                                         <div class="form-group">
-                                            <textarea name="details" id="custom_html" class="form-control" placeholder="Custom HTML"></textarea>
+                                            <textarea name="custom_html" id="custom_html" class="form-control" placeholder="Custom HTML"></textarea>
                                             <span class="text-danger">{{ $errors->first('custom_html') }}</span>
                                         </div>
 
                                         <label for="custom_css">Custom CSS</label>
                                         <div class="form-group">
-                                            <textarea name="details" id="custom_css" class="form-control" placeholder="Custom CSS"></textarea>
+                                            <textarea name="custom_css" id="custom_css" class="form-control" placeholder="Custom CSS"></textarea>
                                             <span class="text-danger">{{ $errors->first('custom_css') }}</span>
                                         </div>
 
                                         <label for="custom_js">Custom JavaScript</label>
                                         <div class="form-group">
-                                            <textarea name="details" id="custom_js" class="form-control" placeholder="Custom JavaScript"></textarea>
+                                            <textarea name="custom_js" id="custom_js" class="form-control" placeholder="Custom JavaScript"></textarea>
                                             <span class="text-danger">{{ $errors->first('custom_js') }}</span>
                                         </div>
                                     </div>

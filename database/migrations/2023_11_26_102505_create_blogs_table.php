@@ -15,6 +15,8 @@ return new class extends Migration
             $table->id();
             $table->integer('category_id');
             $table->string('image');
+            $table->string('image_sm');
+            $table->string('image_thumb');
             $table->string('image_alt')->nullable();
             $table->text('title');
             $table->text('slug');
@@ -26,6 +28,7 @@ return new class extends Migration
             $table->text('keyword')->nullable();
             $table->text('head_script')->nullable();
             $table->text('body_script')->nullable();
+            $table->string('status');
             $table->timestamps();
         });
     }
