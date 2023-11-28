@@ -3344,7 +3344,7 @@ $(function() {
     // summernote editor
     $('.summernote').summernote({
         height: 300,
-        focus: true,
+        focus: false,
         onpaste: function() {
             alert('You have pasted something to the editor');
         }

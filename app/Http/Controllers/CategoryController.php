@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Blog;
 use App\Models\Category;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
@@ -80,6 +81,18 @@ class CategoryController extends Controller
 
     public function delete(Request $request) { 
         $category = Category::where('slug', $request->slug)->firstOrFail();
+
+        
+
+        $blogs = Blog::where('category_id', $category->id)->get();
+
+        foreach ($blogs as $blog) {
+            deleteImg ($blog->image);
+            deleteImg ($blog->image_sm);
+            deleteImg ($blog->image_thumb);
+            
+            $blog->delete();
+        }
 
         $category->delete();
 

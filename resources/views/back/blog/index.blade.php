@@ -88,7 +88,7 @@
                                                     <td>{{ $blog->updated_at->format('d M Y') }}</td>
                                                     <td>
                                                         <div class="btn-area">
-                                                            <a href="{{ route('back.blog.edit', $blog->id) }}" type="submit" class="btn btn-raised btn-primary waves-effect">Edit</a>
+                                                            <a href="{{ route('back.blog.edit', $blog->slug) }}" type="submit" class="btn btn-raised btn-primary waves-effect">Edit</a>
                                                             <a href="#" type="submit" class="btn btn-raised btn-danger waves-effect delete-btn">Delete</a>
                                                             <form class="d-none" action="{{ route('back.blog.delete') }}" method="POST">
                                                                 @csrf

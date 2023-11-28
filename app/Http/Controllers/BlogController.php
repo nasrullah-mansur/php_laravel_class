@@ -10,14 +10,7 @@ use Illuminate\Http\Request;
 class BlogController extends Controller
 {
     public function index() {
-        // return $blogs = Blog::all();
         $blogs = Blog::with('category')->get();
-
-
-        // return Category::with('blogs')->get();
-
-
-
         return view('back.blog.index', compact('blogs'));
     }
 
@@ -34,12 +27,14 @@ class BlogController extends Controller
             'category_id' => 'required',
             'image' => 'required|mimes:png,jpg',
             'details' => 'required',
+        ], [
+            'category_id.required' => 'The category field is required.'
         ]);
 
         $blog = new Blog();
 
         $blog->title = $request->title;
-        $blog->slug = Str::slug($request->title);
+        $blog->slug = Str::slug($request->title) . '-' . rand(111,999);
         $blog->description = $request->description;
         $blog->category_id = $request->category_id;
         $blog->image = upload_custom_image(BLOG_IMAGE, $request->image, null, 850, 420);
@@ -66,11 +61,47 @@ class BlogController extends Controller
     }
 
     public function edit($slug) {
-        
+        $categories = Category::all();
+        $blog = Blog::where('slug', $slug)->firstOrFail();
+        return view('back.blog.edit', compact('categories', 'blog'));
+
     }
 
     public function update(Request $request, $slug) {
-        
+        $request->validate([
+            'title' => 'required|max:256',
+            'description' => 'required',
+            'category_id' => 'required',
+            'image' => 'nullable|mimes:png,jpg',
+            'details' => 'required',
+        ]);
+
+        $blog = Blog::where('slug', $slug)->firstOrFail();
+
+        $blog->title = $request->title;
+        $blog->slug = Str::slug($request->title) . '-' . rand(111,999);
+        $blog->description = $request->description;
+        $blog->category_id = $request->category_id;
+        if($request->hasFile('image')) {
+            $blog->image = upload_custom_image(BLOG_IMAGE, $request->image, $blog->image, 850, 420);
+            $blog->image_sm = upload_custom_image(BLOG_IMAGE_SM, $request->image, $blog->image_sm, 420, 208);
+            $blog->image_thumb = upload_custom_image(BLOG_IMAGE_THUMB, $request->image, $blog->image_thumb, 100, 50);
+        }
+        $blog->details = $request->details;
+
+        $blog->keyword = $request->keyword;
+        $blog->head_script = $request->head_script;
+        $blog->body_script = $request->body_script;
+        $blog->custom_html = $request->custom_html;
+        $blog->custom_css = $request->custom_css;
+        $blog->custom_js = $request->custom_js;
+        $blog->image_alt = $request->image_alt;
+
+        $blog->status = $request->status;
+
+        $blog->save();
+
+        return redirect()->route('back.blog.index')->with('success', 'Blog updated successfully');
     }
 
     public function delete(Request $request) {

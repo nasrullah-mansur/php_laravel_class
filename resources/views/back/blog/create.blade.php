@@ -33,19 +33,19 @@
 
                             <label for="description">Description</label>
                             <div class="form-group">
-                                <textarea name="description" id="description" class="form-control" placeholder="SEO description"></textarea>
+                                <textarea name="description" id="description" class="form-control" placeholder="SEO description">{{ old('description') }}</textarea>
                                 <span class="text-danger">{{ $errors->first('description') }}</span>
                             </div>
                             <label for="category_id">Category Name</label>
 
                             <div class="form-group">
-                                <select name="category_id" class="form-control show-tick ms select2" data-placeholder="Select Category">
+                                <select value="two" name="category_id" class="form-control show-tick ms select2" data-placeholder="Select Category">
                                     <option></option>
                                     @foreach ($categories as $category)
-                                    <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                    <option {{ old('category_id') == $category->id ? 'selected' : '' }} value="{{ $category->id }}">{{ $category->name }}</option>
                                     @endforeach
                                 </select>
-                                <span class="text-danger">{{ $errors->first('name') }}</span>
+                                <span class="text-danger">{{ $errors->first('category_id') }}</span>
                             </div>
 
                             <label for="tags">Tags (Optional)</label>

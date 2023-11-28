@@ -13,4 +13,16 @@ class Category extends Model
     public function blogs() {
         return $this->hasMany(Blog::class, 'category_id', 'id');
     }
+
+
+    // protected static function boot()
+    // {
+    //     parent::boot();
+
+    //     // Listen for the 'deleting' event on the Category model
+    //     static::deleting(function ($category) {
+    //         // Delete associated blog posts
+    //         $category->blogs()->delete();
+    //     });
+    // }
 }
