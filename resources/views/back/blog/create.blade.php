@@ -51,7 +51,7 @@
                             <label for="tags">Tags (Optional)</label>
                             <div class="form-group">
                                 <div class="border py-1" style="border-radius: 5px;">
-                                    <input name="tags[]" type="text" id="tags" class="form-control taginput" data-role="tagsinput" placeholder="SEO Tags" />
+                                    <input name="tags" type="text" id="tags" class="form-control taginput" data-role="tagsinput" placeholder="SEO Tags" />
                                 </div>
                                 <span class="text-danger">{{ $errors->first('tags') }}</span>
                             </div>
@@ -64,7 +64,7 @@
 
                             <label for="image_alt">Image Alt (optional)</label>
                             <div class="form-group">
-                                <input name="image_alt" type="text" id="image_alt" class="form-control" placeholder="SEO Image Alt" />
+                                <input value="{{ old('image_alt') }}" name="image_alt" type="text" id="image_alt" class="form-control" placeholder="SEO Image Alt" />
                                 <span class="text-danger">{{ $errors->first('image_alt') }}</span>
                             </div>
 

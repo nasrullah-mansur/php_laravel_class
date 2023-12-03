@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Blog;
 use App\Models\Category;
+use App\Models\Tag;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 
@@ -20,6 +21,8 @@ class BlogController extends Controller
     }
 
     public function store(Request $request) {
+
+        // return $request;
 
         $request->validate([
             'title' => 'required|max:256',
@@ -42,8 +45,6 @@ class BlogController extends Controller
         $blog->image_thumb = upload_custom_image(BLOG_IMAGE_THUMB, $request->image, null, 100, 50);
         $blog->details = $request->details;
 
-        // $blog->tags = $request->tags;
-
         $blog->keyword = $request->keyword;
         $blog->head_script = $request->head_script;
         $blog->body_script = $request->body_script;
@@ -54,7 +55,30 @@ class BlogController extends Controller
 
         $blog->status = $request->status;
 
+
         $blog->save();
+
+        if($request->tags) {
+            $tags = explode(',', $request->tags);
+            if(count($tags) > 0) {
+                foreach($tags as $val) {
+                    $tag_exist = Tag::where('name', trim($val))->first();
+                    $tag = new Tag();
+
+                    $tag->name = trim($val);
+                    $tag->slug = Str::slug($val);
+
+                    if($tag_exist) {
+                        $tag = $tag_exist;
+                    }
+    
+                    $tag->save();
+
+                    $blog->tags()->sync($tag);
+                }
+            }
+
+        }
 
         return redirect()->route('back.blog.index')->with('success', 'Blog added successfully');
 
@@ -62,8 +86,19 @@ class BlogController extends Controller
 
     public function edit($slug) {
         $categories = Category::all();
-        $blog = Blog::where('slug', $slug)->firstOrFail();
-        return view('back.blog.edit', compact('categories', 'blog'));
+        $blog = Blog::with('tags')->where('slug', $slug)->firstOrFail();
+
+        $tags = $blog->tags;
+        $tag_names = null;
+
+        if(count($tags) > 0) {
+            foreach($tags as $tag) {
+                $tag_names .= $tag->name . ',';
+                // return $tag->name;
+            }
+        }
+
+        return view('back.blog.edit', compact('categories', 'blog', 'tag_names'));
 
     }
 
@@ -100,6 +135,28 @@ class BlogController extends Controller
         $blog->status = $request->status;
 
         $blog->save();
+
+        if($request->tags) {
+            $tags = explode(',', $request->tags);
+            if(count($tags) > 0) {
+                foreach($tags as $val) {
+                    $tag_exist = Tag::where('name', trim($val))->first();
+                    $tag = new Tag();
+
+                    $tag->name = trim($val);
+                    $tag->slug = Str::slug($val);
+
+                    if($tag_exist) {
+                        $tag = $tag_exist;
+                    }
+    
+                    $tag->save();
+
+                    $blog->tags()->sync($tag);
+                }
+            }
+
+        }
 
         return redirect()->route('back.blog.index')->with('success', 'Blog updated successfully');
     }

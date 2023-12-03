@@ -33,7 +33,7 @@
 
                             <label for="description">Description</label>
                             <div class="form-group">
-                                <textarea name="description" id="description" class="form-control" placeholder="SEO description">{{ old('description') }}</textarea>
+                                <textarea name="description" id="description" class="form-control" placeholder="SEO description">{{ old('description') ? old('description') : $blog->description }}</textarea>
                                 <span class="text-danger">{{ $errors->first('description') }}</span>
                             </div>
                             <label for="category_id">Category Name</label>
@@ -55,26 +55,26 @@
                             <label for="tags">Tags (Optional)</label>
                             <div class="form-group">
                                 <div class="border py-1" style="border-radius: 5px;">
-                                    <input name="tags[]" type="text" id="tags" class="form-control taginput" data-role="tagsinput" placeholder="SEO Tags" />
+                                    <input value="{{ old('tags') ? old('tags') : $tag_names }}" name="tags" type="text" id="tags" class="form-control taginput" data-role="tagsinput" placeholder="SEO Tags" />
                                 </div>
                                 <span class="text-danger">{{ $errors->first('tags') }}</span>
                             </div>
 
                             <label for="image">Image</label>
                             <div class="form-group">
-                                <input name="image" type="file" id="image" class="form-control" />
+                                <input data-default-file="{{ asset($blog->image) }}" name="image" type="file" id="image" class="form-control" />
                                 <span class="text-danger">{{ $errors->first('image') }}</span>
                             </div>
 
                             <label for="image_alt">Image Alt (optional)</label>
                             <div class="form-group">
-                                <input name="image_alt" type="text" id="image_alt" class="form-control" placeholder="SEO Image Alt" />
+                                <input value="{{ old('image_alt') ? old('image_alt') : $blog->image_alt }}" name="image_alt" type="text" id="image_alt" class="form-control" placeholder="SEO Image Alt" />
                                 <span class="text-danger">{{ $errors->first('image_alt') }}</span>
                             </div>
 
                             <label for="details">Details</label>
                             <div class="form-group">
-                                <textarea name="details" id="details" class="form-control summernote" placeholder="Details"></textarea>
+                                <textarea name="details" id="details" class="form-control summernote" placeholder="Details">{{ old('details') ? old('details') : $blog->details }}</textarea>
                                 <span class="text-danger">{{ $errors->first('details') }}</span>
                             </div>
 

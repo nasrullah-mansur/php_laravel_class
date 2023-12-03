@@ -75,7 +75,7 @@
                                                 </tr>
                                                 @empty
                                                 <tr>
-                                                    <td colspan="4">
+                                                    <td colspan="5">
                                                         <span class="text-center d-block">No data found</span>
                                                     </td>
                                                 </tr>

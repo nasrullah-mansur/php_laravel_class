@@ -100,7 +100,7 @@
 
                                                 @empty
                                                 <tr>
-                                                    <td colspan="5">
+                                                    <td colspan="8">
                                                         <span class="d-block text-center">No Data Found</span>
                                                     </td>
                                                 </tr>
