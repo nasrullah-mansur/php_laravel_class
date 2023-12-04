@@ -46,7 +46,7 @@ $(document).ready(function() {
         slidesToScroll: 1,
         arrows: true,
         dots: false,
-        // fade: true,
+        fade: true,
         prevArrow: '<button type="button" class="slick-prev"><i class="fa-solid fa-left-long"></i></button>',
         nextArrow: '<button type="button" class="slick-next"><i class="fa-solid fa-right-long"></i></button>',
         responsive: [
