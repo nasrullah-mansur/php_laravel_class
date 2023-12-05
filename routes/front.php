@@ -16,7 +16,8 @@ use App\Http\Controllers\FrontController;
 
 
 Route::get('/', [FrontController::class, 'index'])->name('front.index');
-Route::get('/blog', [FrontController::class, 'blog'])->name('front.blog');
 Route::get('/contact', [FrontController::class, 'contact'])->name('front.contact');
-Route::get('/single-blog', [FrontController::class, 'single_blog'])->name('front.single.blog');
+Route::get('/single-blog/{slug}', [FrontController::class, 'single_blog'])->name('front.single.blog');
+
+Route::get('/blog/category/{slug}', [FrontController::class, 'blog_by_category'])->name('front.blog.by.category');
 

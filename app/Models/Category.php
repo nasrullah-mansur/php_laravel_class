@@ -15,6 +15,11 @@ class Category extends Model
     }
 
 
+    public function getBlogCountAttribute() {
+        return $this->blogs()->count();
+    }
+
+
     // protected static function boot()
     // {
     //     parent::boot();

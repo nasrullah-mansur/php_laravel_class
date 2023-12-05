@@ -60,7 +60,10 @@ class BlogController extends Controller
 
         if($request->tags) {
             $tags = explode(',', $request->tags);
+            
             if(count($tags) > 0) {
+                $newTags = [];
+
                 foreach($tags as $val) {
                     $tag_exist = Tag::where('name', trim($val))->first();
                     $tag = new Tag();
@@ -74,9 +77,15 @@ class BlogController extends Controller
     
                     $tag->save();
 
-                    $blog->tags()->sync($tag);
+                    array_push($newTags, $tag->id);
                 }
+
+                $newTags;
+
+                $blog->tags()->sync($newTags); 
+
             }
+
 
         }
 
@@ -138,7 +147,10 @@ class BlogController extends Controller
 
         if($request->tags) {
             $tags = explode(',', $request->tags);
+            
             if(count($tags) > 0) {
+                $newTags = [];
+
                 foreach($tags as $val) {
                     $tag_exist = Tag::where('name', trim($val))->first();
                     $tag = new Tag();
@@ -152,9 +164,15 @@ class BlogController extends Controller
     
                     $tag->save();
 
-                    $blog->tags()->sync($tag);
+                    array_push($newTags, $tag->id);
                 }
+
+                $newTags;
+
+                $blog->tags()->sync($newTags); 
+
             }
+
 
         }
 
