@@ -21,3 +21,5 @@ Route::get('/single-blog/{slug}', [FrontController::class, 'single_blog'])->name
 
 Route::get('/blog/category/{slug}', [FrontController::class, 'blog_by_category'])->name('front.blog.by.category');
 
+Route::post('/comment', [FrontController::class, 'send_comment'])->name('front.send.comment');
+

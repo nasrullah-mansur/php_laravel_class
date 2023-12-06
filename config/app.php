@@ -160,6 +160,7 @@ return [
          * Package Service Providers...
          */
         Intervention\Image\ImageServiceProvider::class,
+        Laravolt\Avatar\ServiceProvider::class,
         /*
         * Application Service Providers...
         */
@@ -186,6 +187,7 @@ return [
         // 'Example' => App\Facades\Example::class,
         'Image' => Intervention\Image\Facades\Image::class,
         'Debugbar' => Barryvdh\Debugbar\Facades\Debugbar::class,
+        'Avatar'    => Laravolt\Avatar\Facade::class,
     ])->toArray(),
 
 ];

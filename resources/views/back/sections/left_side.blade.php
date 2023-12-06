@@ -32,26 +32,28 @@
                 </ul>
             </li>
 
-            <li><a href="javascript:void(0);" class="menu-toggle"><i class="zmdi zmdi-blogger"></i><span>Slider</span></a>
+            <li class="{{ Route::is('back.slider.*') ? 'active' : '' }}"><a href="javascript:void(0);" class="menu-toggle"><i class="zmdi zmdi-blogger"></i><span>Slider</span></a>
                 <ul class="ml-menu">
-                    <li><a href="{{ route('back.slider.index') }}">All Sliders</a></li>
-                    <li><a href="{{ route('back.slider.create') }}">Create Slider</a></li>                    
+                    <li class="{{ Route::is('back.slider.index') ? 'active' : '' }}"><a href="{{ route('back.slider.index') }}">All Sliders</a></li>
+                    <li class="{{ Route::is('back.slider.create') ? 'active' : '' }}"><a href="{{ route('back.slider.create') }}">Create Slider</a></li>                    
                 </ul>
             </li>
 
-            <li><a href="javascript:void(0);" class="menu-toggle"><i class="zmdi zmdi-blogger"></i><span>Users</span></a>
+            <li class="{{ Route::is('user.*') ? 'active' : '' }}"><a href="javascript:void(0);" class="menu-toggle"><i class="zmdi zmdi-blogger"></i><span>Users</span></a>
                 <ul class="ml-menu">
-                    <li><a href="{{ route('user.index') }}">All User</a></li>
-                    <li><a href="{{ route('user.create') }}">Create User</a></li>                    
+                    <li class="{{ Route::is('user.index') ? 'active' : '' }}"><a href="{{ route('user.index') }}">All User</a></li>
+                    <li class="{{ Route::is('user.create') ? 'active' : '' }}"><a href="{{ route('user.create') }}">Create User</a></li>                    
                 </ul>
             </li>
 
-            <li><a href="javascript:void(0);" class="menu-toggle"><i class="zmdi zmdi-blogger"></i><span>Blog</span></a>
+            <li class="{{ Route::is('back.blog.*') ? 'active' : '' }}"><a href="javascript:void(0);" class="menu-toggle"><i class="zmdi zmdi-blogger"></i><span>Blog</span></a>
                 <ul class="ml-menu">
-                    <li><a href="{{ route('back.blog.index') }}">All Blogs</a></li>
-                    <li><a href="{{ route('back.blog.create') }}">Create Blog</a></li>                    
+                    <li class="{{ Route::is('back.blog.index') ? 'active' : '' }}"><a href="{{ route('back.blog.index') }}">All Blogs</a></li>
+                    <li class="{{ Route::is('back.blog.create') ? 'active' : '' }}"><a href="{{ route('back.blog.create') }}">Create Blog</a></li>                    
                 </ul>
             </li>
+
+            <li><a href="index.html"><i class="zmdi zmdi-blogger"></i><span>Comment</span></a></li>
         </ul>
     </div>
 </aside>

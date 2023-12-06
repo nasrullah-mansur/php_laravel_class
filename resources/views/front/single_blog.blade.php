@@ -79,87 +79,55 @@
                 <div class="comment-area">
                     <h2>RECENT COMMENTS</h2>
                     <ul>
+                        @foreach ($comments as $comment)
                         <li>
                             <div class="img">
-                                <img src="{{ asset('front/images/user-01.jpg') }}" alt="img">
+                                <img style="border-radius: 50%" src="{{ Avatar::create($comment->email)->toGravatar() }}" alt="{{ $comment->name }}">
                             </div>
                             <div class="content">
                                 <div class="title">
-                                    <h5>Omar Elnagar</h5>
-                                    <span>September 13, 2018 at 10:38 AM</span>
+                                    <h5>{{ $comment->name }}</h5>
+                                    <span>{{ $comment->created_at->format('d F Y') }} at {{ $comment->created_at->format('h:i A') }}</span>
                                 </div>
-                                <p>They call him Flipper Flipper faster than lightning. No one you see is smarter than he. They call him Flipper Flipper the faster than lightning. No one you see is smarter than he</p>
-                                <a class="reply" href="#"><i class="fa-solid fa-reply"></i> REPLY</a>
+                                <p>{{ $comment->comment }}</p>
+                                <a data-id="{{ $comment->id }}" class="reply" href="#comment-area"><i class="fa-solid fa-reply"></i> REPLY</a>
                             </div>
 
                             <ul>
+                                @foreach ($comment->replies as $reply)
                                 <li>
                                     <div class="img">
-                                        <img src="{{ asset('front/images/user-01.jpg') }}" alt="img">
+                                        <img style="border-radius: 50%" src="{{ Avatar::create($comment->email)->toGravatar() }}" alt="{{ $reply->name }}">
                                     </div>
                                     <div class="content">
                                         <div class="title">
-                                            <h5>Omar Elnagar</h5>
-                                            <span>September 13, 2018 at 10:38 AM</span>
+                                            <h5>{{ $reply->name }}</h5>
+                                            <span>{{ $reply->created_at->format('d F Y') }} at {{ $reply->created_at->format('h:i A') }}</span>
                                         </div>
-                                        <p>They call him Flipper Flipper faster than lightning. No one you see is smarter than he. They call him Flipper Flipper the faster than lightning. No one you see is smarter than he</p>
-                                        <a class="reply" href="#"><i class="fa-solid fa-reply"></i> REPLY</a>
+                                        <p>{{ $reply->comment }}</p>
+                                        <a data-id="{{ $comment->id }}" class="reply" href="#comment-area"><i class="fa-solid fa-reply"></i> REPLY</a>
                                     </div>
                                 </li>
+                                @endforeach
                             </ul>
-                        </li>
-                        <li>
-                            <div class="img">
-                                <img src="{{ asset('front/images/user-01.jpg') }}" alt="img">
-                            </div>
-                            <div class="content">
-                                <div class="title">
-                                    <h5>Omar Elnagar</h5>
-                                    <span>September 13, 2018 at 10:38 AM</span>
-                                </div>
-                                <p>They call him Flipper Flipper faster than lightning. No one you see is smarter than he. They call him Flipper Flipper the faster than lightning. No one you see is smarter than he</p>
-                                <a class="reply" href="#"><i class="fa-solid fa-reply"></i> REPLY</a>
-                            </div>
 
-                            <ul>
-                                <li>
-                                    <div class="img">
-                                        <img src="{{ asset('front/images/user-01.jpg') }}" alt="img">
-                                    </div>
-                                    <div class="content">
-                                        <div class="title">
-                                            <h5>Omar Elnagar</h5>
-                                            <span>September 13, 2018 at 10:38 AM</span>
-                                        </div>
-                                        <p>They call him Flipper Flipper faster than lightning. No one you see is smarter than he. They call him Flipper Flipper the faster than lightning. No one you see is smarter than he</p>
-                                        <a class="reply" href="#"><i class="fa-solid fa-reply"></i> REPLY</a>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="img">
-                                        <img src="{{ asset('front/images/user-01.jpg') }}" alt="img">
-                                    </div>
-                                    <div class="content">
-                                        <div class="title">
-                                            <h5>Omar Elnagar</h5>
-                                            <span>September 13, 2018 at 10:38 AM</span>
-                                        </div>
-                                        <p>They call him Flipper Flipper faster than lightning. No one you see is smarter than he. They call him Flipper Flipper the faster than lightning. No one you see is smarter than he</p>
-                                        <a class="reply" href="#"><i class="fa-solid fa-reply"></i> REPLY</a>
-                                    </div>
-                                </li>
-                            </ul>
                         </li>
+                        @endforeach
+                        
                     </ul>
                 </div>
 
                 <!-- Comment area -->
-                <div class="comment-area">
+                <div class="comment-area" id="comment-area">
                     <h2 class="text-uppercase">Leave your comment here</h2>
-                    <form>
-                        <input class="half" type="text" placeholder="your Name">
-                        <input class="half" type="text" placeholder="your Email">
-                        <textarea placeholder="Your Comment"></textarea>
+                    <form method="POST" action="{{ route('front.send.comment') }}">
+                        @csrf 
+                        <input type="hidden" name="blog_id" value="{{ $blog->id }}">
+                        <input type="hidden" name="parent_id" value="0">
+
+                        <input value="{{ Session::has('name') ? Session::get('name') : old('name') }}" name="name" class="half form-control {{ $errors->has('name') ? 'is-invalid' : '' }}" type="text" placeholder="your Name">
+                        <input value="{{ Session::has('email') ? Session::get('email') : old('email') }}" name="email" class="half form-control {{ $errors->has('email') ? 'is-invalid' : '' }}" type="text" placeholder="your Email">
+                        <textarea name="comment" placeholder="Your Comment" class="form-control {{ $errors->has('comment') ? 'is-invalid' : '' }}">{{ old('comment') }}</textarea>
                         <button type="submit">Send Comment</button>
                     </form>
                 </div>
@@ -177,7 +145,77 @@
                 </aside>
             </div>
         </div>
+
+        <div class="alart-box">
+
+            @if ($errors->any())
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <strong>Sorry!</strong> Please check the form again.
+                <button type="button" class="btn-close"></button>
+            </div>            
+            @endif
+
+            @if (Session::has('success'))
+            <div class="alert alert-primary alert-dismissible fade show" role="alert">
+                <strong>Welcome!</strong> {{ Session::get('success') }}
+                <button type="button" class="btn-close"></button>
+            </div>
+            @endif
+            
+        </div>
+
     </div>
 </section>
 <!-- Post end -->
+@endsection
+
+@section('custom_css')
+<style>
+    .alart-box {
+        position: fixed;
+        right: 30px;
+        top: 30px;
+        width: 420px;
+        z-index: 999;
+    }
+</style>
+@endsection
+
+
+@section('custom_js')
+<script>
+    $('input, textarea').on('keyup', function() {
+        $(this).removeClass('is-invalid')
+    })
+
+    let form_errors =   "{{ $errors }}";
+
+    $(document).ready(function() {
+        if(form_errors !== "[]") {
+            scrollToComment();
+        }
+    })
+
+    $('.reply').on('click', function() {
+        scrollToComment();
+
+        let dataId = $(this).attr('data-id');
+
+        $('[name="parent_id"]').val(dataId);
+
+        console.log(dataId);
+    })
+
+    function scrollToComment() {
+        // $('html, body').animate({
+        //     scrollTop: $("#comment-area").offset().top
+        // }, 1000);
+    }
+
+    $('.btn-close').on('click', function() {
+        $('.alart-box').fadeOut();
+    })
+
+
+</script>
 @endsection

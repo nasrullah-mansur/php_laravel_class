@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Blog;
 use App\Models\Slider;
 use App\Models\Category;
+use App\Models\Comment;
 use App\Models\Tag;
+use Illuminate\Http\Request;
 
 class FrontController extends Controller
 {
@@ -75,9 +77,16 @@ class FrontController extends Controller
         ->limit(3)
         ->get();
 
-        
+        $blog = Blog::where('slug', $slug)->with('category', 'tags')->firstOrFail();
 
-       $blog = Blog::where('slug', $slug)->with('category', 'tags')->firstOrFail();
+
+        $comments = Comment::where('parent_id', 0)
+        ->with('replies')
+        ->where('status', STATUS_MSG[0])
+        ->where('blog_id', $blog->id)
+        ->orderBy('created_at', 'asc')
+        ->get();
+
 
        $tags = $blog->tags;
 
@@ -102,12 +111,38 @@ class FrontController extends Controller
             'blog',
             'prev_blog',
             'next_blog',
-            'related_blogs'
+            'related_blogs',
+            'comments'
         ));
     }
 
 
     public function contact() {
         return view('front.contact');
+    }
+
+
+    public function send_comment(Request $request) {
+        $request->validate([
+            'name' => 'required|max:256',
+            'email' => 'required|email',
+            'comment' => 'required',
+            'blog_id' => 'required|integer',
+            'parent_id' => 'required|integer'
+        ]);
+
+        $comment = new Comment();
+        $comment->name = $request->name;
+        $comment->email = $request->email;
+        $comment->comment = $request->comment;
+        $comment->blog_id = $request->blog_id;
+        $comment->parent_id = $request->parent_id;
+        // $comment->save();
+
+        return redirect()->back()->with([
+            'success' => 'Your comment has been uploaded successfully.',
+            'name' => $request->name,
+            'email' => $request->email,
+        ]);
     }
 }
