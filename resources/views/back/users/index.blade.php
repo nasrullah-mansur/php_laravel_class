@@ -45,52 +45,7 @@
                                 <div class="body">
                                     
                                     <div class="table-responsive">
-                                        <table class="table table-striped">
-                                            <thead>
-                                                <tr class="bg-dark text-white">
-                                                    <th>Sl</th>
-                                                    <th>Image</th>
-                                                    <th>Name</th>
-                                                    <th>Email</th>
-                                                    <th>Created At</th>
-                                                    <th>Updated At</th>
-                                                    <th>Action</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                @forelse ($users as $user)
-                                                <tr>
-                                                    <th scope="row">{{ $loop->iteration }}</th>
-                                                    <td>
-                                                        AV
-                                                    </td>
-                                                    <td>{{ $user->name }}</td>
-                                                    <td>{{ $user->email }}</td>
-                                                    
-                                                    <td>{{ $user->created_at->diffForHumans() }}</td>
-                                                    <td>{{ $user->updated_at->diffForHumans() }}</td>
-                                                    <td>
-                                                        <div class="btn-area">
-                                                            <a href="{{ route('user.edit', $user->id) }}" type="submit" class="btn btn-raised btn-primary waves-effect">Edit</a>
-                                                            <a href="#" type="submit" class="btn btn-raised btn-danger waves-effect delete-btn">Delete</a>
-                                                            <form class="d-none" action="{{ route('user.destroy', $user->id) }}" method="POST">
-                                                                @csrf
-                                                                @method('DELETE')
-                                                                <input type="test" name="id" value="{{ $user->id }}">
-                                                            </form>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-
-                                                @empty
-                                                <tr>
-                                                    <td colspan="5">
-                                                        <span class="d-block text-center">No Data Found</span>
-                                                    </td>
-                                                </tr>
-                                                @endforelse
-                                            </tbody>
-                                        </table>
+                                        {{ $dataTable->table() }}
                                     </div>
                                 </div>
                             </div>
@@ -103,13 +58,24 @@
 </section>
 @endsection
 
+@push('scripts')
+    {{ $dataTable->scripts(attributes: ['type' => 'module']) }}
+@endpush
+
 
 @section('custom_js')
 <script>
 
+// 
+
     $(document).ready(function() {
 
-        $('.delete-btn').on('click', function() {
+       
+
+        $('.table').on('click', '.delete-btn', function(e) {
+            e.preventDefault();
+            
+            let dataId = $(this).attr('data-id');
             swal({
                 title: "Are you sure?",
                 text: "Once deleted, you will not be able to recover this imaginary file!",
@@ -123,9 +89,21 @@
                     icon: "success",
                   });
                   
-                  let myForm = $(this).next();
+                //   let myForm = $(this).next();
 
-                  myForm.submit();
+                //   myForm.submit();
+
+                $.ajax({
+                    type: 'POST',
+                    url: "{{ route('user.delete') }}",
+                    data: {
+                        id: dataId,
+                        "_token": "{{ csrf_token() }}",
+                    },
+                    success: function(response) {
+                        $('.dataTable').DataTable().ajax.reload();
+                    }
+                });
 
                 } else {
                   swal("Your imaginary file is safe!");

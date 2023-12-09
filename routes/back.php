@@ -1,10 +1,14 @@
 <?php
 
+use App\Http\Controllers\AppearanceController;
 use App\Http\Controllers\BlogController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\EmailController;
 use App\Http\Controllers\SliderController;
+use App\Http\Controllers\SocialController;
 use App\Http\Controllers\UserController;
 
 /*
@@ -45,7 +49,8 @@ Route::middleware('auth')->group(function() {
 
 
         // Users;
-        Route::resource('user', UserController::class)->except('show');
+        Route::resource('user', UserController::class)->except(['show', 'destroy']);
+        Route::post('user/delete', [UserController::class, 'destroy'])->name('user.delete');
 
 
         // Blog;
@@ -58,6 +63,22 @@ Route::middleware('auth')->group(function() {
 
 
 
+        // Email;
+        Route::get('/email/create', [EmailController::class, 'create'])->name('back.email.create');
+        Route::post('/email/store', [EmailController::class, 'store'])->name('back.email.store');
+
+        // Appearance;
+        Route::get('/appearance/create', [AppearanceController::class, 'create'])->name('back.appearance.create');
+        Route::post('/appearance/store', [AppearanceController::class, 'store'])->name('back.appearance.store');
+
+
+        // Social;
+        Route::get('/social/create', [SocialController::class, 'create'])->name('back.social.create');
+        Route::post('/social/store', [SocialController::class, 'store'])->name('back.social.store');
+
+        // Contact;
+        Route::get('/contact/create', [ContactController::class, 'create'])->name('back.contact.create');
+        Route::post('/contact/store', [ContactController::class, 'store'])->name('back.contact.store');
 
 
     });

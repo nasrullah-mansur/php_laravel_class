@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CommentController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FrontController;
 
@@ -21,5 +22,5 @@ Route::get('/single-blog/{slug}', [FrontController::class, 'single_blog'])->name
 
 Route::get('/blog/category/{slug}', [FrontController::class, 'blog_by_category'])->name('front.blog.by.category');
 
-Route::post('/comment', [FrontController::class, 'send_comment'])->name('front.send.comment');
+Route::post('/comment', [CommentController::class, 'send_comment'])->name('front.send.comment');
 

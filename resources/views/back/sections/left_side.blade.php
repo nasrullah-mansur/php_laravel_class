@@ -18,10 +18,11 @@
             <li><a href="index.html"><i class="zmdi zmdi-blogger"></i><span>Dashboard</span></a></li>
             <li><a href="javascript:void(0);" class="menu-toggle"><i class="zmdi zmdi-blogger"></i><span>App</span></a>
                 <ul class="ml-menu">
-                    <li><a href="mail-inbox.html">Email</a></li>
-                    <li><a href="chat.html">Chat Apps</a></li>
-                    <li><a href="events.html">Calendar</a></li>
-                    <li><a href="contact.html">Contact</a></li>                    
+                    <li><a href="{{ route('back.email.create') }}">Email</a></li>
+                    <li><a href="{{ route('back.appearance.create') }}">Appearance</a></li>
+                    <li><a href="#">Social</a></li>                   
+                    <li><a href="{{ route('back.contact.create') }}">Contact</a></li>                   
+                    <li><a href="#">Cache Clear</a></li>                   
                 </ul>
             </li>
 

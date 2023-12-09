@@ -15,5 +15,10 @@
 <link rel="stylesheet" href="{{ asset('back/plugins/bootstrap-select/css/bootstrap-select.css') }}" />
 <link rel="stylesheet" href="{{ asset('back/plugins/select2/select2.css') }}" />
 <link rel="stylesheet" href="{{ asset('back/plugins/bootstrap-tagsinput/bootstrap-tagsinput.css') }}">
+
+<link rel="stylesheet" href="//cdn.datatables.net/1.13.7/css/jquery.dataTables.min.css">
+{{-- <link rel="stylesheet" href="//cdn.datatables.net/buttons/2.4.2/css/buttons.bootstrap.css">
+<link rel="stylesheet" href="//cdn.datatables.net/buttons/2.4.2/css/buttons.bootstrap5.css"> --}}
+
 <!-- Custom Css -->
 <link rel="stylesheet" href="{{ asset('back/css/style.min.css') }}">

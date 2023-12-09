@@ -28,7 +28,7 @@
                                 <a href="{{ route('front.single.blog', $blog->slug) }}"><img class="img-fluid w-100" src="{{ asset($blog->image_sm) }}" alt="{{ $blog->image_alt ? $blog->image_alt : $blog->title  }}"></a>
                                 <h3><a href="{{ route('front.single.blog', $blog->slug) }}">{{ $blog->title}}</a></h3>
                                 <div class="info">
-                                    <a href="{{ route('front.blog.by.category', $blog->slug) }}" class="category">{{ $blog->category->name }}</a>
+                                    <a href="{{ route('front.blog.by.category', $blog->category->slug) }}" class="category">{{ $blog->category->name }}</a>
                                     <div class="date">
                                         <i class="fas fa-calendar-alt"></i>
                                         <span>{{ $blog->created_at->format('d M Y') }}</span>

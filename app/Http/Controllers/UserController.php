@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\DataTables\UsersDataTable;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -13,12 +14,14 @@ class UserController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(UsersDataTable $dataTable)
     {
 
-        $users = User::orderBy('created_at', 'DESC') ->get();
+        // $users = User::orderBy('created_at', 'DESC') ->get();
 
-        return view('back.users.index', compact('users'));
+        // return view('back.users.index', compact('users'));
+
+        return $dataTable->render('back.users.index');
     }
 
     /**
@@ -98,15 +101,17 @@ class UserController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Request $request)
     {
-        $user = User::where('id', $id)->firstOrFail();
+        // return $request;
+
+        $user = User::where('id', $request->id)->firstOrFail();
 
         $user->delete();
 
-        if(Auth::user()->email === $user->email) {
-            Auth::logout();
-        }
+        // if(Auth::user()->email === $user->email) {
+        //     Auth::logout();
+        // }
 
         return redirect()->route('user.index')->with('success', "User removed successfully");
     }

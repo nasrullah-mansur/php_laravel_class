@@ -161,6 +161,7 @@ return [
          */
         Intervention\Image\ImageServiceProvider::class,
         Laravolt\Avatar\ServiceProvider::class,
+        Yajra\DataTables\DataTablesServiceProvider::class,
         /*
         * Application Service Providers...
         */

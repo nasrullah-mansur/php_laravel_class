@@ -47,7 +47,7 @@ class FrontController extends Controller
         $blogs = Blog::where('category_id', $category->id)
         ->where('status', STATUS_MSG[0])
         ->orderBy('created_at', 'DESC')
-        ->paginate(3);
+        ->paginate(8);
 
         $popular_posts = Blog::with('category')
         ->where('status', STATUS_MSG[0])
@@ -121,28 +121,4 @@ class FrontController extends Controller
         return view('front.contact');
     }
 
-
-    public function send_comment(Request $request) {
-        $request->validate([
-            'name' => 'required|max:256',
-            'email' => 'required|email',
-            'comment' => 'required',
-            'blog_id' => 'required|integer',
-            'parent_id' => 'required|integer'
-        ]);
-
-        $comment = new Comment();
-        $comment->name = $request->name;
-        $comment->email = $request->email;
-        $comment->comment = $request->comment;
-        $comment->blog_id = $request->blog_id;
-        $comment->parent_id = $request->parent_id;
-        // $comment->save();
-
-        return redirect()->back()->with([
-            'success' => 'Your comment has been uploaded successfully.',
-            'name' => $request->name,
-            'email' => $request->email,
-        ]);
-    }
 }

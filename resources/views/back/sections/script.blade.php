@@ -16,5 +16,11 @@
 
 <script src="{{ asset('back/plugins/bootstrap-tagsinput/bootstrap-tagsinput.js') }}"></script>
 
+<script src="//cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
+
+{{-- <script src="//cdn.datatables.net/buttons/2.4.2/js/buttons.bootstrap.js"></script>
+<script src="//cdn.datatables.net/buttons/2.4.2/js/buttons.bootstrap5.js"></script> --}}
+
 
 @yield('custom_js')
+@stack('scripts')
