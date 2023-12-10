@@ -45,68 +45,7 @@
                                 <div class="body">
                                     
                                     <div class="table-responsive">
-                                        <table class="table table-striped">
-                                            <thead>
-                                                <tr class="bg-dark text-white">
-                                                    <th>Sl</th>
-                                                    <th>Image</th>
-                                                    <th>Title</th>
-                                                    <th>Category</th>
-                                                    <th>Status</th>
-                                                    <th>Created At</th>
-                                                    <th>Updated At</th>
-                                                    <th>Action</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                @forelse ($blogs as $blog)
-                                                <tr>
-                                                    <th scope="row">{{ $loop->iteration }}</th>
-                                                    <td>
-                                                        <img style="width: 90px" src="{{ asset($blog->image_thumb) }}" alt="image">
-                                                    </td>
-                                                    <td>{{ $blog->title }}</td>
-                                                    <td>{{ $blog->category->name }}</td>
-                                                    <td>
-                                                        @php
-                                                            $status_color = 'bg-dark';
-                                                            if($blog->status == 'Active') {
-                                                                $status_color = 'bg-success text-white'; 
-                                                            } 
-
-                                                            if($blog->status == 'Inactive') {
-                                                                $status_color = 'bg-info text-white'; 
-                                                            }
-
-                                                            if($blog->status == 'Draft') {
-                                                                $status_color = 'bg-light'; 
-                                                            }
-                                                        @endphp
-                                                        <span class="{{$status_color}} p-1 font-bold" >{{ $blog->status }}</span>
-                                                    </td>
-                                                    <td>{{ $blog->created_at->format('d M Y') }}</td>
-                                                    <td>{{ $blog->updated_at->format('d M Y') }}</td>
-                                                    <td>
-                                                        <div class="btn-area">
-                                                            <a href="{{ route('back.blog.edit', $blog->slug) }}" type="submit" class="btn btn-raised btn-primary waves-effect">Edit</a>
-                                                            <a href="#" type="submit" class="btn btn-raised btn-danger waves-effect delete-btn">Delete</a>
-                                                            <form class="d-none" action="{{ route('back.blog.delete') }}" method="POST">
-                                                                @csrf
-                                                                <input type="test" name="id" value="{{ $blog->id }}">
-                                                            </form>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-
-                                                @empty
-                                                <tr>
-                                                    <td colspan="8">
-                                                        <span class="d-block text-center">No Data Found</span>
-                                                    </td>
-                                                </tr>
-                                                @endforelse
-                                            </tbody>
-                                        </table>
+                                        {{ $dataTable->table() }}
                                     </div>
                                 </div>
                             </div>
@@ -119,13 +58,21 @@
 </section>
 @endsection
 
+@push('scripts')
+    {{ $dataTable->scripts(attributes: ['type' => 'module']) }}
+@endpush
+
 
 @section('custom_js')
 <script>
 
     $(document).ready(function() {
 
-        $('.delete-btn').on('click', function() {
+        $('.table').on('click', '.delete-btn', function(e) {
+            e.preventDefault();
+
+            let dataId = $(this).attr('data-id');
+
             swal({
                 title: "Are you sure?",
                 text: "Once deleted, you will not be able to recover this imaginary file!",
@@ -139,9 +86,17 @@
                     icon: "success",
                   });
                   
-                  let myForm = $(this).next();
-
-                  myForm.submit();
+                 $.ajax({
+                    type: 'POST',
+                    url: "{{ route('back.blog.delete') }}",
+                    data: {
+                        id: dataId,
+                        "_token": "{{ csrf_token() }}",
+                    },
+                    success: function(response) {
+                        $('.dataTable').DataTable().ajax.reload();
+                    }
+                });
 
                 } else {
                   swal("Your imaginary file is safe!");

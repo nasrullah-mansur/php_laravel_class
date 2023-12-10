@@ -51,19 +51,19 @@ class UsersDataTable extends DataTable
                     ->addIndex()
                     ->setTableId('data-table')
                     ->addTableClass('table-striped table-bordered')
-                    ->autoWidth()
                     ->columns($this->getColumns())
                     ->minifiedAjax()
                     // ->dom('Bfrtip')
+                    ->dom('lBfrtip')
                     ->orderBy(3)
+                    ->responsive()
+                    ->autoWidth(false)
                     ->selectStyleSingle()
                     ->buttons([
                         Button::make('excel'),
                         Button::make('csv'),
                         Button::make('pdf'),
-                        Button::make('print'),
-                        Button::make('reset'),
-                        Button::make('reload')
+                        Button::make('print')
                     ]);
     }
 

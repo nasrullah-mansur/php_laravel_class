@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\DataTables\BlogDataTable;
 use App\Models\Blog;
 use App\Models\Category;
 use App\Models\Tag;
@@ -10,9 +11,8 @@ use Illuminate\Http\Request;
 
 class BlogController extends Controller
 {
-    public function index() {
-        $blogs = Blog::with('category')->get();
-        return view('back.blog.index', compact('blogs'));
+    public function index(BlogDataTable $dataTable) {
+        return $dataTable->render('back.blog.index');
     }
 
     public function create() {
@@ -180,6 +180,7 @@ class BlogController extends Controller
     }
 
     public function delete(Request $request) {
+
         $blog = Blog::where('id', $request->id)->firstOrFail();
 
         deleteImg ($blog->image);
