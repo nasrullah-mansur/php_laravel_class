@@ -29,6 +29,16 @@ class UsersDataTable extends DataTable
             ->editColumn('created_at', function($query) {
                 return $query->created_at->format('d M Y');
             })
+            ->editColumn('role', function($query) {
+
+                $roles = [];
+
+                foreach ($query->roles as $role) {
+                    array_push($roles, "<span class='d-inline-block px-2 py-1 rounded mr-2 mb-2 text-white bg-info'>$role->name</span>");
+                }
+
+                return  implode(' ', $roles);
+            })
             ->editColumn('updated_at', function($query) {
                 return $query->updated_at->format('d M Y');
             });
@@ -77,6 +87,7 @@ class UsersDataTable extends DataTable
             // Column::make('id'),
             Column::make('name'),
             Column::make('email'),
+            Column::make('role')->orderable(false)->searchable(false),
             Column::make('created_at')->searchable(false),
             Column::make('updated_at')->searchable(false),
             Column::computed('action')

@@ -47,6 +47,15 @@
                 </ul>
             </li>
 
+            <li class="{{ Route::is('role.*', 'permission.*') ? 'active' : '' }}"><a href="javascript:void(0);" class="menu-toggle"><i class="zmdi zmdi-blogger"></i><span>Permission</span></a>
+                <ul class="ml-menu">
+                    <li class="{{ Route::is('role.index') ? 'active' : '' }}"><a href="{{ route('role.index') }}">All Roles</a></li>
+                    <li class="{{ Route::is('role.create') ? 'active' : '' }}"><a href="{{ route('role.create') }}">Create Role</a></li>
+                    <li class="{{ Route::is('permission.index') ? 'active' : '' }}"><a href="{{ route('permission.index') }}">All Permissions</a></li>                    
+                    <li class="{{ Route::is('permission.create') ? 'active' : '' }}"><a href="{{ route('permission.create') }}">Create Permissions</a></li>                    
+                </ul>
+            </li>
+
             <li class="{{ Route::is('back.blog.*') ? 'active' : '' }}"><a href="javascript:void(0);" class="menu-toggle"><i class="zmdi zmdi-blogger"></i><span>Blog</span></a>
                 <ul class="ml-menu">
                     <li class="{{ Route::is('back.blog.index') ? 'active' : '' }}"><a href="{{ route('back.blog.index') }}">All Blogs</a></li>

@@ -12,6 +12,7 @@
         "laravel/sanctum": "^3.3",
         "laravel/tinker": "^2.8",
         "laravolt/avatar": "^5.0",
+        "spatie/laravel-permission": "^6.3",
         "yajra/laravel-datatables": "10.0",
         "yajra/laravel-datatables-oracle": "10.3.1"
     },

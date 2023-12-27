@@ -7,6 +7,8 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\EmailController;
+use App\Http\Controllers\PermissionController;
+use App\Http\Controllers\RoleController;
 use App\Http\Controllers\SliderController;
 use App\Http\Controllers\SocialController;
 use App\Http\Controllers\UserController;
@@ -29,13 +31,13 @@ Route::middleware('auth')->group(function() {
         Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
         // Blog Categories;
+        // Route::middleware('admin')->group(function() {
+        // });
         Route::get('/categories', [CategoryController::class, 'index'])->name('back.category.index');
         Route::get('/category/create', [CategoryController::class, 'create'])->name('back.category.create');
         Route::post('/category/store', [CategoryController::class, 'store'])->name('back.category.store');
-
         Route::get('/category/{slug}', [CategoryController::class, 'edit'])->name('back.category.edit');
         Route::post('/category/update/{slug}', [CategoryController::class, 'update'])->name('back.category.update');
-
         Route::post('/category/delete', [CategoryController::class, 'delete'])->name('back.category.delete');
 
 
@@ -80,6 +82,23 @@ Route::middleware('auth')->group(function() {
         Route::get('/contact/create', [ContactController::class, 'create'])->name('back.contact.create');
         Route::post('/contact/store', [ContactController::class, 'store'])->name('back.contact.store');
 
+
+        // Role;
+        Route::get('/roles', [RoleController::class, 'index'])->name('role.index');
+        Route::get('/roles/create', [RoleController::class, 'create'])->name('role.create');
+        Route::post('/roles/store', [RoleController::class, 'store'])->name('role.store');
+        Route::get('/roles/edit/{id}', [RoleController::class, 'edit'])->name('role.edit');
+        Route::post('/roles/update/{id}', [RoleController::class, 'update'])->name('role.update');
+        Route::post('/roles/delete', [RoleController::class, 'destroy'])->name('role.delete');
+
+
+        // Role;
+        Route::get('/permission', [PermissionController::class, 'index'])->name('permission.index');
+        Route::get('/permission/create', [PermissionController::class, 'create'])->name('permission.create');
+        Route::post('/permission/store', [PermissionController::class, 'store'])->name('permission.store');
+        Route::get('/permission/edit/{id}', [PermissionController::class, 'edit'])->name('permission.edit');
+        Route::post('/permission/update/{id}', [PermissionController::class, 'update'])->name('permission.update');
+        Route::post('/permission/delete', [PermissionController::class, 'destroy'])->name('permission.delete');
 
     });
 });

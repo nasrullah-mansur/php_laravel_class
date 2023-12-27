@@ -39,6 +39,15 @@
                                 <span class="text-danger">{{ $errors->first('email') }}</span>
                             </div>
 
+                            <div class="form-group">
+                                <select value="two" name="role" class="form-control show-tick ms select2" data-placeholder="Select Category">
+                                    @foreach ($roles as $role)
+                                    <option value="{{ $role->name }}">{{ ucwords($role->name) }}</option>
+                                    @endforeach
+                                </select>
+                                <span class="text-danger">{{ $errors->first('role') }}</span>
+                            </div>
+
                             <label for="password">Password</label>
                             <div class="form-group">                                
                                 <input name="password" type="password" id="password" class="form-control" placeholder="Enter Password">

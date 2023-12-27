@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\DataTables\UsersDataTable;
 use App\Models\User;
 use Illuminate\Http\Request;
+use App\DataTables\UsersDataTable;
 use Illuminate\Support\Facades\DB;
+use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
@@ -29,7 +30,8 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view('back.users.create');
+        $roles = Role::all();
+        return view('back.users.create', compact('roles'));
     }
 
     /**
@@ -68,8 +70,9 @@ class UserController extends Controller
      */
     public function edit(string $id)
     {
+        $roles = Role::all();
         $user = User::where('id', $id)->firstOrFail();
-        return view('back.users.edit', compact('user'));
+        return view('back.users.edit', compact('user', 'roles'));
     }
 
     /**
@@ -83,17 +86,20 @@ class UserController extends Controller
         $request->validate([
             'name' => 'required|max:256',
             'password' => 'required|min:6',
-            'confirm_password' => 'required|same:password'
+            'confirm_password' => 'required|same:password',
+            'role' => 'required'
         ]);
         
         $user->name = $request->name;
         $user->password = Hash::make($request->password);
 
         $user->save();
+
+        $user->syncRoles($request->role);
         
-        if(Auth::user()->email === $user->email) {
-            Auth::logout();
-        }
+        // if(Auth::user()->email === $user->email) {
+        //     Auth::logout();
+        // }
         
         return redirect()->route('user.index')->with('success', "User updated successfully");
     }
