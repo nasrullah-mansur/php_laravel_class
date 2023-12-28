@@ -60,7 +60,13 @@
                                                 <tr>
                                                     <th scope="row">{{ $loop->iteration }}</th>
                                                     <td>{{ ucwords($role->name) }}</td>
-                                                    <td>permissions</td>
+                                                    <td>
+                                                        [
+                                                            @foreach ($role->permissions as $permission)
+                                                            {{$permission->name}},
+                                                            @endforeach
+                                                        ]
+                                                    </td>
                                                     <td>{{ $role->created_at->format('d M Y') }}</td>
                                                     <td>
                                                         <div class="btn-area">

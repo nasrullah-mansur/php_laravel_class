@@ -33,6 +33,9 @@ Route::middleware('auth')->group(function() {
         // Blog Categories;
         // Route::middleware('admin')->group(function() {
         // });
+        // Route::get('/categories', [CategoryController::class, 'index'])->name('back.category.index')->middleware('permission:category index');
+        // Route::get('/category/create', [CategoryController::class, 'create'])->name('back.category.create')->middleware('permission:category create');
+        
         Route::get('/categories', [CategoryController::class, 'index'])->name('back.category.index');
         Route::get('/category/create', [CategoryController::class, 'create'])->name('back.category.create');
         Route::post('/category/store', [CategoryController::class, 'store'])->name('back.category.store');
@@ -84,7 +87,9 @@ Route::middleware('auth')->group(function() {
 
 
         // Role;
+        // Route::get('/roles', [RoleController::class, 'index'])->name('role.index');
         Route::get('/roles', [RoleController::class, 'index'])->name('role.index');
+
         Route::get('/roles/create', [RoleController::class, 'create'])->name('role.create');
         Route::post('/roles/store', [RoleController::class, 'store'])->name('role.store');
         Route::get('/roles/edit/{id}', [RoleController::class, 'edit'])->name('role.edit');
@@ -92,7 +97,7 @@ Route::middleware('auth')->group(function() {
         Route::post('/roles/delete', [RoleController::class, 'destroy'])->name('role.delete');
 
 
-        // Role;
+        // Permission;
         Route::get('/permission', [PermissionController::class, 'index'])->name('permission.index');
         Route::get('/permission/create', [PermissionController::class, 'create'])->name('permission.create');
         Route::post('/permission/store', [PermissionController::class, 'store'])->name('permission.store');

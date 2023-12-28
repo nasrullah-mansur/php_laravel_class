@@ -41,7 +41,7 @@ class RoleController extends Controller
 
         $role->save();
 
-        $role->givePermissionTo($request->permissions);
+        $role->syncPermissions($request->permissions);
 
         return redirect()->route('role.index');
 
@@ -80,7 +80,7 @@ class RoleController extends Controller
 
         $role->save();
 
-        $role->givePermissionTo($request->permissions);
+        $role->syncPermissions($request->permissions);
 
         return redirect()->route('role.index');
     }

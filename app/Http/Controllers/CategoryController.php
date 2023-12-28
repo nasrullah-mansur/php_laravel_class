@@ -6,13 +6,34 @@ use App\Models\Blog;
 use App\Models\Category;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use App\Helpers\PermissionHandler;
 
 class CategoryController extends Controller
 {
 
     public function __construct()
     {
-        $this->middleware('admin')->except('index');
+        // $this->middleware('permission:category index')->only('index');
+        // $this->middleware('permission:category create')->only('create');
+        // $this->middleware('permission:category store')->only('store');
+        // $this->middleware('permission:category edit')->only('edit');
+        // $this->middleware('permission:category update')->only('update');
+        // $this->middleware('permission:category delete')->only('delete');
+
+
+        $permission = new PermissionHandler($this, 'category');
+        $permission->run();
+
+        // $permission->only([
+        //     'index' => 'index',
+        //     'create' => 'create'
+        // ])->run();
+
+        // $permission->except([
+        //     'index' => 'index',
+        //     'create' => 'create'
+        // ])->run();
+
     }
 
     public function index() {
@@ -22,14 +43,9 @@ class CategoryController extends Controller
         return view('back.category.index', compact('categories'));
     }
 
-
-
-
     public function create() {
         return view('back.category.create');
     }
-
-
 
     public function store(Request $request) {
         $request->validate([
@@ -53,13 +69,11 @@ class CategoryController extends Controller
 
     }
 
-
     public function edit($slug) {
         $category = Category::where('slug', $slug)->firstOrFail();
 
         return view('back.category.edit', compact('category'));
     }
-
 
     public function update(Request $request, $slug) {
         $request->validate([
@@ -81,7 +95,6 @@ class CategoryController extends Controller
 
         return redirect()->route('back.category.index')->with('success', 'Category updated successful');
     }
-
 
     public function delete(Request $request) { 
         $category = Category::where('slug', $request->slug)->firstOrFail();

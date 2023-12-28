@@ -4,10 +4,15 @@ namespace App\Http\Controllers;
 
 use App\Models\Slider;
 use Illuminate\Http\Request;
+use App\Helpers\PermissionHandler;
 use Intervention\Image\Facades\Image;
 
 class SliderController extends Controller
 {
+    public function __construct() {
+        $permission = new PermissionHandler($this, 'slider');
+        $permission->run();
+    }
 
     public function index() {
         $sliders = Slider::all();

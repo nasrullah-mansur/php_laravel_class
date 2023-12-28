@@ -5,9 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\DataTables\UsersDataTable;
-use Illuminate\Support\Facades\DB;
 use Spatie\Permission\Models\Role;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
@@ -52,6 +50,8 @@ class UserController extends Controller
         $user->password = Hash::make($request->password);
 
         $user->save();
+        
+        $user->syncRoles($request->role);
 
         return redirect()->route('user.index')->with('success', "User added successfully");
 
